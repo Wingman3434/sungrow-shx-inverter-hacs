@@ -13,3 +13,6 @@
   500 caused by a non-serializable validator in `data_schema`).
 - Fixed: CPython syntax gate, so the Python 3.14-only `except A, B:` form cannot
   ship again.
+- Fixed: `exceptions.no_preset_target` was a bare string, so the `set_preset`
+  service error could not be translated into a message and hassfest validation
+  failed on it.
