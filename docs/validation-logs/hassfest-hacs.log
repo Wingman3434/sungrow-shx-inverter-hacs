@@ -1,0 +1,30 @@
+Validating application_credentials... done in 0.02s
+Validating bluetooth... done in 0.01s
+Validating codeowners... done in 0.00s
+Validating conditions... done in 0.00s
+Validating config_schema... done in 0.00s
+Validating dependencies... done in 0.37s
+Validating dhcp... done in 0.01s
+Validating icons... done in 0.00s
+Validating integration_info... done in 0.00s
+Validating integration_type... done in 0.00s
+Validating json... done in 0.00s
+Validating labs... done in 0.01s
+Validating manifest... done in 0.00s
+Validating mqtt... done in 0.01s
+Validating quality_scale... done in 0.00s
+Validating requirements... done in 0.00s
+Validating services... done in 0.01s
+Validating ssdp... done in 0.01s
+Validating translations... done in 0.01s
+Validating triggers... done in 0.00s
+Validating usb... done in 0.01s
+Validating zeroconf... done in 0.01s
+Validating config_flow... done in 0.01s
+
+Integrations: 1
+Invalid integrations: 0
+
+Integration sungrow_shx_inverter - /root/.openclaw/workspace/projects/sungrow-modbus-work/review-2026-09-14/deliverables/sungrow-shx-inverter-hacs/custom_components/sungrow_shx_inverter:
+* [WARNING] [MANIFEST] Domain collides with built-in core integration
+

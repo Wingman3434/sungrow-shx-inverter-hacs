@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+python3 -c 'import sys; sys.version_info >= (3, 14, 2) or sys.exit("Python 3.14.2 or newer is required")'
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements_common.txt
+.venv/bin/python -m pip install -r requirements_dev.txt

@@ -1,0 +1,5 @@
+default_config:
+logger:
+  default: info
+  logs:
+    custom_components.sungrow_shx_inverter: debug

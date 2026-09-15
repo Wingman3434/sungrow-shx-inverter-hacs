@@ -1,0 +1,5 @@
+-r requirements_lint.txt
+homeassistant==2026.9.2
+pytest-homeassistant-custom-component==0.13.365
+modbus-connection[tmodbus]==4.10.0
+pymodbus==3.13.1

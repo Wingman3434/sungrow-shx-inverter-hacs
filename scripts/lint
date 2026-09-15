@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+# CPython parse gate first: Ruff is not a syntax authority (it accepts the
+# Python 3.14-only unparenthesized `except A, B:` form that 3.12/3.13 reject).
+.venv/bin/python scripts/check_syntax.py
+.venv/bin/ruff format --check .
+.venv/bin/ruff check .

@@ -1,0 +1,15 @@
+..............                                                           [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.14.5-final-0 ________________
+
+Name                                                           Stmts   Miss  Cover   Missing
+--------------------------------------------------------------------------------------------
+homeassistant/components/sungrow_shx_inverter/__init__.py         20      0   100%
+homeassistant/components/sungrow_shx_inverter/config_flow.py      35      0   100%
+homeassistant/components/sungrow_shx_inverter/const.py             7      0   100%
+homeassistant/components/sungrow_shx_inverter/coordinator.py      63      1    98%   86
+homeassistant/components/sungrow_shx_inverter/entity.py           22      0   100%
+homeassistant/components/sungrow_shx_inverter/sensor.py           37      1    97%   257
+--------------------------------------------------------------------------------------------
+TOTAL                                                            184      2    99%
+14 passed in 1.29s

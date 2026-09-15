@@ -1,0 +1,17 @@
+{
+  "domain": "sungrow_shx_inverter",
+  "name": "Sungrow SHx Inverter",
+  "codeowners": [
+    "@Wingman3434"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "modbus"
+  ],
+  "documentation": "https://github.com/Wingman3434/sungrow-shx-inverter-hacs",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Wingman3434/sungrow-shx-inverter-hacs/issues",
+  "requirements": [],
+  "version": "0.0.2"
+}

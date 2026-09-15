@@ -1,0 +1,6 @@
+Sungrow register mappings and calculations derived from the 2026-06-19
+residential hybrid inverter register package by Martin Kaiser and contributors.
+Source register package SHA-256 is recorded in REGISTER_MAP.md.
+Original copyright (c) 2025 Martin Kaiser; MIT licence in LICENSES/.
+Library structure and development workflows adapted from darkrain-nl/sofar-modbus,
+Apache-2.0. New source is Apache-2.0. No manufacturer endorsement is implied.

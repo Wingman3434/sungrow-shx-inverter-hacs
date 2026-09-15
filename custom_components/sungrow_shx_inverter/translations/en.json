@@ -1,0 +1,569 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Sungrow",
+        "description": "Connect to the inverter using its Modbus TCP address.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "unit_id": "Unit ID",
+          "message_wait": "Message spacing (seconds)"
+        },
+        "data_description": {
+          "host": "IP address or hostname of the inverter or Modbus TCP gateway.",
+          "port": "TCP port configured on the device; normally 502.",
+          "unit_id": "Modbus unit address of this inverter, from 1 to 247.",
+          "message_wait": "Gap between requests in seconds. For example, 5 ms is 0.005 seconds; 100 ms is 0.1 seconds. WiNet-S may need a longer gap."
+        }
+      },
+      "reconfigure": {
+        "title": "Connect to Sungrow",
+        "description": "Connect to the inverter using its Modbus TCP address.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "unit_id": "Unit ID",
+          "message_wait": "Message spacing (seconds)"
+        },
+        "data_description": {
+          "host": "IP address or hostname of the inverter or Modbus TCP gateway.",
+          "port": "TCP port configured on the device; normally 502.",
+          "unit_id": "Modbus unit address of this inverter, from 1 to 247.",
+          "message_wait": "Gap between requests in seconds. For example, 5 ms is 0.005 seconds; 100 ms is 0.1 seconds. WiNet-S may need a longer gap."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to communicate with the inverter.",
+      "unsupported_device": "The device code or serial number is not supported."
+    },
+    "abort": {
+      "already_configured": "This inverter is already configured.",
+      "unique_id_mismatch": "This is a different inverter. Reconfiguration cannot change the device.",
+      "reconfigure_successful": "Connection settings updated."
+    }
+  },
+  "exceptions": {
+    "device_changed": {
+      "message": "The configured address now identifies a different inverter."
+    },
+    "unsupported_device": {
+      "message": "The device is not a supported Sungrow inverter."
+    },
+    "modbus_error": {
+      "message": "Unable to communicate with the inverter."
+    },
+    "no_component_answered": {
+      "message": "No inverter subsystem answered."
+    },
+    "write_failed": {
+      "message": "The inverter did not confirm the write."
+    },
+    "invalid_value": {
+      "message": "The requested value is outside the device's supported range."
+    },
+    "no_preset_target": "Select a Sungrow operating-preset entity as the service target"
+  },
+  "entity": {
+    "sensor": {
+      "version_1": {
+        "name": "Version 1"
+      },
+      "version_2": {
+        "name": "Version 2"
+      },
+      "version_3": {
+        "name": "Version 3"
+      },
+      "version_4_sungrow_battery": {
+        "name": "Version 4 (Sungrow Battery)"
+      },
+      "protocol_version": {
+        "name": "Protocol Version"
+      },
+      "arm_software": {
+        "name": "Arm Software"
+      },
+      "dsp_software": {
+        "name": "DSP Software"
+      },
+      "inverter_serial": {
+        "name": "inverter serial"
+      },
+      "device_type_code": {
+        "name": "device type code"
+      },
+      "inverter_rated_output": {
+        "name": "Inverter rated output"
+      },
+      "daily_pv_generation_battery_discharge": {
+        "name": "Daily PV generation & battery discharge"
+      },
+      "total_pv_generation_battery_discharge": {
+        "name": "Total PV generation & battery discharge"
+      },
+      "inverter_temperature": {
+        "name": "Inverter temperature"
+      },
+      "mppt1_voltage": {
+        "name": "MPPT1 voltage"
+      },
+      "mppt1_current": {
+        "name": "MPPT1 current"
+      },
+      "mppt2_voltage": {
+        "name": "MPPT2 voltage"
+      },
+      "mppt2_current": {
+        "name": "MPPT2 current"
+      },
+      "mppt3_voltage": {
+        "name": "MPPT3 voltage"
+      },
+      "mppt3_current": {
+        "name": "MPPT3 current"
+      },
+      "total_dc_power": {
+        "name": "Total DC power"
+      },
+      "phase_a_voltage": {
+        "name": "Phase A voltage"
+      },
+      "phase_b_voltage": {
+        "name": "Phase B voltage"
+      },
+      "phase_c_voltage": {
+        "name": "Phase C voltage"
+      },
+      "reactive_power": {
+        "name": "Reactive power"
+      },
+      "power_factor": {
+        "name": "Power factor"
+      },
+      "mppt4_voltage": {
+        "name": "MPPT4 voltage"
+      },
+      "mppt4_current": {
+        "name": "MPPT4 current"
+      },
+      "battery_power": {
+        "name": "Battery power"
+      },
+      "grid_frequency": {
+        "name": "Grid frequency"
+      },
+      "meter_active_power": {
+        "name": "Meter active power"
+      },
+      "meter_phase_a_active_power": {
+        "name": "Meter phase A active power"
+      },
+      "meter_phase_b_active_power": {
+        "name": "Meter phase B active power"
+      },
+      "meter_phase_c_active_power": {
+        "name": "Meter phase C active power"
+      },
+      "export_power_limit_min": {
+        "name": "Export power limit min"
+      },
+      "export_power_limit_max": {
+        "name": "Export power limit max"
+      },
+      "bdc_rated_power": {
+        "name": "BDC rated power"
+      },
+      "battery_current": {
+        "name": "Battery current"
+      },
+      "bms_max_charging_current": {
+        "name": "BMS max. charging current"
+      },
+      "bms_max_discharging_current": {
+        "name": "BMS max. discharging current"
+      },
+      "battery_capacity_high_precision": {
+        "name": "Battery capacity high precision"
+      },
+      "backup_phase_a_power": {
+        "name": "Backup phase A power"
+      },
+      "backup_phase_b_power": {
+        "name": "Backup phase B power"
+      },
+      "backup_phase_c_power": {
+        "name": "Backup phase C power"
+      },
+      "total_backup_power": {
+        "name": "Total backup power"
+      },
+      "meter_phase_a_voltage": {
+        "name": "Meter phase A voltage"
+      },
+      "meter_phase_b_voltage": {
+        "name": "Meter phase B voltage"
+      },
+      "meter_phase_c_voltage": {
+        "name": "Meter phase C voltage"
+      },
+      "meter_phase_a_current": {
+        "name": "Meter phase A current"
+      },
+      "meter_phase_b_current": {
+        "name": "Meter phase B current"
+      },
+      "meter_phase_c_current": {
+        "name": "Meter phase C current"
+      },
+      "running_state_raw": {
+        "name": "Running state raw"
+      },
+      "power_flow_status": {
+        "name": "Power Flow Status"
+      },
+      "daily_pv_generation": {
+        "name": "Daily PV generation"
+      },
+      "total_pv_generation": {
+        "name": "Total PV generation"
+      },
+      "daily_exported_energy_from_pv": {
+        "name": "Daily exported energy from PV"
+      },
+      "total_exported_energy_from_pv": {
+        "name": "Total exported energy from PV"
+      },
+      "load_power": {
+        "name": "Load power"
+      },
+      "export_power_raw": {
+        "name": "Export power raw"
+      },
+      "daily_battery_charge_from_pv": {
+        "name": "Daily battery charge from PV"
+      },
+      "total_battery_charge_from_pv": {
+        "name": "Total battery charge from PV"
+      },
+      "daily_direct_energy_consumption": {
+        "name": "Daily direct energy consumption"
+      },
+      "total_direct_energy_consumption": {
+        "name": "Total direct energy consumption"
+      },
+      "battery_voltage": {
+        "name": "Battery voltage"
+      },
+      "battery_level": {
+        "name": "Battery level"
+      },
+      "battery_state_of_health": {
+        "name": "Battery state of health"
+      },
+      "battery_temperature": {
+        "name": "Battery temperature"
+      },
+      "daily_battery_discharge": {
+        "name": "Daily battery discharge"
+      },
+      "total_battery_discharge": {
+        "name": "Total battery discharge"
+      },
+      "phase_a_current": {
+        "name": "Phase A current"
+      },
+      "phase_b_current": {
+        "name": "Phase B current"
+      },
+      "phase_c_current": {
+        "name": "Phase C current"
+      },
+      "total_active_power": {
+        "name": "Total active power"
+      },
+      "daily_imported_energy": {
+        "name": "Daily imported energy"
+      },
+      "total_imported_energy": {
+        "name": "Total imported energy"
+      },
+      "daily_battery_charge": {
+        "name": "Daily battery charge"
+      },
+      "total_battery_charge": {
+        "name": "Total battery charge"
+      },
+      "daily_exported_energy": {
+        "name": "Daily exported energy"
+      },
+      "total_exported_energy": {
+        "name": "Total exported energy"
+      },
+      "load_adjustment_mode_selection_raw": {
+        "name": "Load adjustment mode selection raw"
+      },
+      "load_adjustment_mode_enable_raw": {
+        "name": "Load adjustment mode enable raw"
+      },
+      "ems_mode_selection_raw": {
+        "name": "EMS mode selection raw"
+      },
+      "battery_forced_charge_discharge_cmd_raw": {
+        "name": "Battery forced charge discharge cmd raw"
+      },
+      "battery_forced_charge_discharge_power": {
+        "name": "Battery forced charge discharge power"
+      },
+      "battery_max_soc": {
+        "name": "Battery max SoC"
+      },
+      "battery_min_soc": {
+        "name": "Battery min SoC"
+      },
+      "export_power_limit": {
+        "name": "Export power limit"
+      },
+      "backup_mode_raw": {
+        "name": "Backup mode raw"
+      },
+      "export_power_limit_mode_raw": {
+        "name": "Export power limit mode raw"
+      },
+      "active_power_limitation_raw": {
+        "name": "Active power limitation raw"
+      },
+      "active_power_limitation_ratio_raw": {
+        "name": "Active power limitation ratio raw"
+      },
+      "battery_reserved_soc_for_backup": {
+        "name": "Battery reserved SoC for backup"
+      },
+      "inverter_firmware_version": {
+        "name": "Inverter Firmware Version"
+      },
+      "communication_module_firmware_version": {
+        "name": "Communication Module Firmware Version"
+      },
+      "battery_firmware_version": {
+        "name": "Battery Firmware Version"
+      },
+      "apl_shutdown_at_zero_raw": {
+        "name": "APL shutdown at zero raw"
+      },
+      "battery_max_charge_power": {
+        "name": "Battery max charge power"
+      },
+      "battery_max_discharge_power": {
+        "name": "Battery max discharge power"
+      },
+      "battery_charging_start_power": {
+        "name": "Battery charging start power"
+      },
+      "battery_discharging_start_power": {
+        "name": "Battery discharging start power"
+      },
+      "mppt1_power": {
+        "name": "MPPT1 power"
+      },
+      "mppt2_power": {
+        "name": "MPPT2 power"
+      },
+      "mppt3_power": {
+        "name": "MPPT3 power"
+      },
+      "mppt4_power": {
+        "name": "MPPT4 power"
+      },
+      "phase_a_power": {
+        "name": "Phase A apparent power"
+      },
+      "phase_b_power": {
+        "name": "Phase B apparent power"
+      },
+      "phase_c_power": {
+        "name": "Phase C apparent power"
+      },
+      "inverter_state": {
+        "name": "inverter state"
+      },
+      "device_type": {
+        "name": "device type"
+      },
+      "battery_charging_power_signed": {
+        "name": "Battery charging power signed"
+      },
+      "battery_charging_power": {
+        "name": "Battery charging power"
+      },
+      "battery_discharging_power_signed": {
+        "name": "Battery discharging power signed"
+      },
+      "battery_discharging_power": {
+        "name": "Battery discharging power"
+      },
+      "import_power": {
+        "name": "Import power"
+      },
+      "export_power": {
+        "name": "Export power"
+      },
+      "battery_level_nominal": {
+        "name": "Battery level (nominal)"
+      },
+      "battery_charge_nominal": {
+        "name": "Battery charge (nominal)"
+      },
+      "battery_charge": {
+        "name": "Battery charge"
+      },
+      "battery_charge_health_rated": {
+        "name": "Battery charge (health-rated)"
+      },
+      "daily_consumed_energy": {
+        "name": "Daily consumed energy"
+      },
+      "total_consumed_energy": {
+        "name": "Total consumed energy"
+      }
+    },
+    "binary_sensor": {
+      "pv_generating": {
+        "name": "PV generating"
+      },
+      "battery_charging": {
+        "name": "Battery charging"
+      },
+      "battery_discharging": {
+        "name": "Battery discharging"
+      },
+      "positive_load_power": {
+        "name": "Positive Load Power"
+      },
+      "exporting_power": {
+        "name": "Exporting Power"
+      },
+      "importing_power": {
+        "name": "Importing Power"
+      },
+      "negative_load_power": {
+        "name": "Negative Load Power"
+      }
+    },
+    "number": {
+      "battery_min_soc": {
+        "name": "Battery Min Soc"
+      },
+      "battery_max_soc": {
+        "name": "Battery Max Soc"
+      },
+      "battery_reserved_soc_for_backup": {
+        "name": "Battery Reserved SoC for Backup"
+      },
+      "battery_charging_start_power": {
+        "name": "Battery charging start power"
+      },
+      "battery_discharging_start_power": {
+        "name": "Battery discharging start power"
+      },
+      "battery_forced_charge_discharge_power": {
+        "name": "Battery forced charge discharge power"
+      },
+      "battery_max_charge_power": {
+        "name": "Battery max charge power"
+      },
+      "battery_max_discharge_power": {
+        "name": "Battery max discharge power"
+      },
+      "export_power_limit": {
+        "name": "Export power limit"
+      }
+    },
+    "switch": {
+      "backup_mode": {
+        "name": "Backup Mode"
+      },
+      "export_power_limit": {
+        "name": "Export power limit"
+      },
+      "load_adjustment_mode": {
+        "name": "Load adjustment mode"
+      }
+    },
+    "select": {
+      "ems_mode": {
+        "name": "EMS mode",
+        "state": {
+          "self_consumption_mode": "Self-consumption mode (default)",
+          "forced_mode": "Forced mode",
+          "external_ems": "External EMS",
+          "vpp": "VPP"
+        }
+      },
+      "battery_forced_charge_discharge": {
+        "name": "Battery forced charge discharge",
+        "state": {
+          "stop": "Stop (default)",
+          "forced_charge": "Forced charge",
+          "forced_discharge": "Forced discharge"
+        }
+      },
+      "load_adjustment_mode": {
+        "name": "Load adjustment mode",
+        "state": {
+          "timing": "Timing",
+          "on_off": "ON/OFF",
+          "power_optimization": "Power optimization",
+          "disabled": "Disabled"
+        }
+      },
+      "operating_preset": {
+        "name": "Operating preset",
+        "state": {
+          "self_consumption_max_battery_discharge": "Self-consumption (max battery discharge)",
+          "self_consumption_no_battery_discharge": "Self-consumption (no battery discharge)",
+          "zero_export": "Zero export",
+          "max_export": "Maximum export",
+          "battery_bypass": "Battery bypass",
+          "battery_forced_discharge": "Battery forced discharge",
+          "battery_forced_charge": "Battery forced charge"
+        }
+      }
+    },
+    "button": {
+      "start_inverter": {
+        "name": "Start inverter"
+      },
+      "stop_inverter": {
+        "name": "Stop inverter"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Battery power limit",
+        "description": "Optionally cap battery power controls for this installation. Clear the field to use the inverter's reported BDC limit. This does not change the inverter until a control is used.",
+        "data": {
+          "battery_max_power": "Battery power cap (W)"
+        },
+        "data_description": {
+          "battery_max_power": "Use a limit suitable for the installed battery. The lower of this value and the inverter's BDC rating is used."
+        }
+      }
+    }
+  },
+  "services": {
+    "set_preset": {
+      "name": "Set operating preset",
+      "description": "Apply one source mode preset: EMS mode, forced charge/discharge command and the relevant limit, using the inverter's live maximum.",
+      "fields": {
+        "preset": {
+          "name": "Preset",
+          "description": "Mode preset to apply."
+        }
+      }
+    }
+  }
+}

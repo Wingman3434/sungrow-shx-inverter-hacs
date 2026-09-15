@@ -1,0 +1,24 @@
+set_preset:
+  name: Set operating preset
+  description: >-
+    Apply one source mode preset: EMS mode, forced charge/discharge command and
+    the relevant limit, using the inverter's live maximum values.
+  target:
+    entity:
+      integration: sungrow_shx_inverter
+      domain: select
+  fields:
+    preset:
+      name: Preset
+      description: Mode preset to apply.
+      required: true
+      selector:
+        select:
+          options:
+            - self_consumption_max_battery_discharge
+            - self_consumption_no_battery_discharge
+            - zero_export
+            - max_export
+            - battery_bypass
+            - battery_forced_discharge
+            - battery_forced_charge

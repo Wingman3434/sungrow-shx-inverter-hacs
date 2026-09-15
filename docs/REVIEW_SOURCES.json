@@ -1,0 +1,177 @@
+[
+  {
+    "url": "https://developers.home-assistant.io/docs/creating_component_index",
+    "title": "First integration",
+    "decision": "Native integration domain, config entry and correct custom/Core version distinction.",
+    "snapshot": "00.md",
+    "sha256": "15f5b339a8a90d49b337f9c88c34f3d1e8b878ee2e0dcb6e8bbc499dc44b5fcb"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/core/integration/contributing_to_core",
+    "title": "Contributing to Core",
+    "decision": "Fixed: top-level overlay now one platform/15 sensors; complete work retained in follow-up, not one large PR.",
+    "snapshot": "01.md",
+    "sha256": "1f54d1ed6b1d3b5ff6034fb61530bf8860d7e802401fdfefefa65fcfceebf50e"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/creating_integration_file_structure/",
+    "title": "Integration file structure",
+    "decision": "Renamed domain paths, manifests, tests/imports, shared modules and custom brand assets.",
+    "snapshot": "02.md",
+    "sha256": "e4b42c6fd35347fee1d900f6c3d5faf56fe4d07c036d8f6474606c21ce639a55"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/creating_integration_tests_file_structure/",
+    "title": "Integration test file structure",
+    "decision": "Split tests into test_init, test_config_flow, test_sensor, test_controls and test_diagnostics as applicable.",
+    "snapshot": "03.md",
+    "sha256": "d7269792749dd28de5ff75784b6b8b933b7e2d0274f79440314484189005ff93"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/creating_integration_manifest/",
+    "title": "Integration manifest",
+    "decision": "Product name, valid domain, device/local_polling, Modbus dependency, exact library pin; custom-only version/issues.",
+    "snapshot": "04.md",
+    "sha256": "87f20366028ef278344aeab344e32940c8fe8ab855daaea386b682d11b024a9a"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/core/integration/config_flow/",
+    "title": "Config flow",
+    "decision": "Serial uniqueness and test-before-configure; millisecond gap; user input/reconfigure tested. Reconfigure only in full build.",
+    "snapshot": "05.md",
+    "sha256": "fb91e77c38d8a17fc6291b3b28b90508b08a6a728d010cef8c4434da3929fcfe"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/core/integration/options_flow/",
+    "title": "Options flow",
+    "decision": "Fixed: optional installation battery cap uses ConfigEntry.options and OptionsFlowWithReload; can be cleared.",
+    "snapshot": "06.md",
+    "sha256": "da21d4b1b0d17f4efd9ba08e4de1c3bff8d660fa3f1eb72fc5f92777d7035f60"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/core/integration/yaml_configuration/",
+    "title": "YAML configuration",
+    "decision": "UI setup only. Original YAML is immutable reference; optional helpers are not integration YAML configuration.",
+    "snapshot": "07.md",
+    "sha256": "ae434083396c8773d067bcdc8f5dadeb6265436b88f67bfb54b7a81623059751"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/core/integration/diagnostics/",
+    "title": "Diagnostics",
+    "decision": "Full build only. Host/serial omitted, raw identity words removed, exception messages not exported; tests retained.",
+    "snapshot": "08.md",
+    "sha256": "f0213551b37e16e6dbb12377e8f3133a65bb5ed1b531648740153ae3f901e88b"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/core/integration/system_health/",
+    "title": "System health",
+    "decision": "Reviewed, not added: no cloud endpoint/quota; coordinator, logs and diagnostics already describe local health.",
+    "snapshot": "09.md",
+    "sha256": "a5c4cedf67a4d1b63e48bd42fa3d6c24396ca74ff184d79f191e0317ef8ac3c4"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/development_checklist/",
+    "title": "Development checklist",
+    "decision": "Pinned public dependency prerequisite, source distribution, issue tracker, generated metadata instructions, Ruff/typing.",
+    "snapshot": "10.md",
+    "sha256": "a3088379a786ba0db5fa7fc229bf367b4c557c49f66657f485555cf5e99cdf0f"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/creating_component_code_review/",
+    "title": "Component review checklist",
+    "decision": "No direct protocol implementation in Core. Current UI/runtime_data guidance takes precedence over older YAML examples.",
+    "snapshot": "11.md",
+    "sha256": "60343d106e6cad41c8a9d9574dcad13ae5a55323e86f3fe82680f5991194aa71"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/creating_platform_code_review/",
+    "title": "Platform review checklist",
+    "decision": "CoordinatorEntity lifecycle; no I/O in entity properties; cached reads, unique IDs, platform parallelism.",
+    "snapshot": "12.md",
+    "sha256": "710a4204d23f67fc8e5c5cf2133f43e0b4c8747507bfe9dea007f6dd3b44e0cb"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/modbus/introduction/",
+    "title": "Modbus introduction",
+    "decision": "Rechecked async_get_unit/temporary_unit and connection ownership; real shared-transport multi-unit test added.",
+    "snapshot": "13.md",
+    "sha256": "90ac8d476cc10610415e11a96c62d3603b3bda65afb1ce9383536902531800d3"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/core/integration-quality-scale/",
+    "title": "Integration quality scale",
+    "decision": "Bronze is a target, not an award. Library-publication and new-brand prerequisites remain todo.",
+    "snapshot": "14.web.md",
+    "sha256": "cae362e5b245b1f1cd0d92c8437448b73a8c708c2e35083d4b277a083acc6c8e"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/core/integration-quality-scale/checklist",
+    "title": "Quality-scale checklist",
+    "decision": "Every Bronze rule has implementation evidence or exemption; no unsupported claim that public steps are done.",
+    "snapshot": "15.web.md",
+    "sha256": "48c1959f5899a9d3c70989847f69aaefad6350ec4deeb6d173c9fc561f52dac3"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/review-process/",
+    "title": "PR review process",
+    "decision": "Initial small PR plus sequenced future work, current dev/human review requirements; no PR opened.",
+    "snapshot": "16.md",
+    "sha256": "4cbdd5bff4955a2a1dcca9bb793eb0aa45c0015545a419ec5512689daa45e49d"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/api_lib_index",
+    "title": "Library introduction",
+    "decision": "Standalone async typed library with OSI metadata, public issue/release preparation, editable development.",
+    "snapshot": "17.md",
+    "sha256": "5f9e5d0e43d24387a934bf2374b3c29509c30813a839b2969a9f48e56c9a7f3d"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/api_lib_auth",
+    "title": "Library authentication",
+    "decision": "Local Modbus has no authentication/OAuth. Caller injects the unit; no irrelevant HTTP auth/state storage added.",
+    "snapshot": "18.md",
+    "sha256": "c062f6e37cbc0cf250fd10912f19a296bd90d146b57d1ffd0b66d7e8fdb85ffe"
+  },
+  {
+    "url": "https://developers.home-assistant.io/docs/api_lib_data_models",
+    "title": "Library data models",
+    "decision": "Native register fields retained; engineering scaling is wire decoding. Optional arithmetic stays separately exposed.",
+    "snapshot": "19.md",
+    "sha256": "a56949167988351db81d686b2f8df3a0f547eaef7c9d7a62bfb00b81545e21ba"
+  },
+  {
+    "url": "https://packaging.python.org/en/latest/tutorials/packaging-projects/",
+    "title": "Packaging projects",
+    "decision": "Hatchling minimum, SPDX licence expression, classifiers, lock, wheel/sdist build and Twine metadata validation.",
+    "snapshot": "20.rst",
+    "sha256": "f1e37a2ac66d6ad10f24c16a8dbaba998dd05c2da20e0fcdf82ba711b183f09d"
+  },
+  {
+    "url": "https://www.hacs.xyz/docs/publish/start/",
+    "title": "HACS publishing start",
+    "decision": "README, prepared repo description/topics/issues, hacs.json and full-release instructions.",
+    "snapshot": "21.web.md",
+    "sha256": "7887fbdadd9abbfb95ebddfe409fefed5353d773b3c38c3cd5741edc94edb001"
+  },
+  {
+    "url": "https://www.hacs.xyz/docs/publish/include/",
+    "title": "HACS default inclusion",
+    "decision": "Explicitly documented Core-testing/override exclusion; custom-repository distribution remains the supported route.",
+    "snapshot": "22.web.md",
+    "sha256": "dc5a21b78aff8b4bc17232cb22041dba9a543f0cb643ac4f3711523af277dfef"
+  },
+  {
+    "url": "https://www.hacs.xyz/docs/publish/integration/",
+    "title": "HACS integration requirements",
+    "decision": "One custom_components domain, self-contained vendor tree, version/issue metadata, icon and validator workflows.",
+    "snapshot": "23.web.md",
+    "sha256": "8de12d78e2dcb2301a13f947576307697ef64b1ca0a9380be24caeafeaa26ba5"
+  },
+  {
+    "url": "https://github.com/mkaiser/Sungrow-SHx-Inverter-Modbus-Home-Assistant/tree/main",
+    "title": "Sungrow upstream repository",
+    "decision": "README plus installation, usage, FAQ, dashboards, migration and changelog read. Main YAML unchanged from supplied source.",
+    "snapshot": "24.web.md",
+    "sha256": "ef53e644ec70c78f7e319251939a9d6ba010d65d8583930542d23699ba2beb21"
+  }
+]
