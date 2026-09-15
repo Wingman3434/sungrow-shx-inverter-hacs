@@ -63,7 +63,9 @@
     "invalid_value": {
       "message": "The requested value is outside the device's supported range."
     },
-    "no_preset_target": "Select a Sungrow operating-preset entity as the service target"
+    "no_preset_target": {
+      "message": "Select a Sungrow operating-preset entity as the service target."
+    }
   },
   "entity": {
     "sensor": {
