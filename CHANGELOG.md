@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.5 — community testing build
+
+- Brand assets: the icon now has a transparent background (the white was keyed
+  out, keeping the anti-aliased edges), and the integration ships `dark_icon` and
+  `dark_logo` variants for dark mode. Light mode keeps the orange-tile logo; dark
+  mode shows a white wordmark on transparency.
+
 ## 0.0.4 — community testing build
 
 - Brand assets: the integration now ships its own icons and logos
