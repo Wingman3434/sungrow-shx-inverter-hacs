@@ -104,6 +104,30 @@ instead of a configured secret. The same action is exposed as the
 itself can be used from scenes and dashboards. Presets write only when chosen;
 nothing executes at setup or poll time.
 
+### Migrating from the upstream scenes
+
+The upstream YAML package exposed its modes as seven scenes. This integration's
+**Operating preset** selector covers the same ground, so no scenes, helpers or
+scripts are needed:
+
+| Upstream scene | Operating preset option |
+| --- | --- |
+| Sungrow Self-Consumption Mode | Self-consumption (max battery discharge) |
+| Sungrow Set Self-Consumption Limited Discharge | Self-consumption (no battery discharge) |
+| Sungrow Set Zero Export Power | Zero export |
+| Sungrow Set Max Export Power | Maximum export |
+| Sungrow Set Battery Bypass Mode | Battery bypass |
+| Sungrow Set Battery Forced Discharge | Battery forced discharge |
+| Sungrow Set Battery Forced Charge | Battery forced charge |
+
+The upstream scenes and their scripts reference the old package's entity IDs and a
+`sungrow_modbus_wait_milliseconds` secret, so they are not compatible with this
+integration. To trigger a preset from an automation, call the
+`sungrow_shx_inverter.set_preset` service, or use `select.select_option` on the
+**Operating preset** entity. Manual EMS control uses the same selectors and numbers
+the upstream dashboard tab exposed: EMS mode, forced charge/discharge command,
+minimum/maximum SoC, charge/discharge power and export power limit.
+
 `scripts/generate_helpers.py` can generate an **optional** helper package:
 seven delayed flags, the five-minute daily-consumption filter and a dashboard
 visibility toggle with timed reset. The seven preset scripts it also emits are

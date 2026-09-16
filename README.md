@@ -36,6 +36,29 @@ unit ID and message gap in seconds. Set any optional battery power cap through
 new entry; it is not an automatic upgrade.** Follow the migration/rollback
 section in [the user guide](docs/USER_GUIDE.md).
 
+## Connection overview
+
+The integration talks to the inverter over **Modbus TCP** on your local network. No
+cloud account, installer password or iSolarCloud access is involved.
+
+- **Prefer the inverter's internal LAN port.** Connect it to your network and give
+  it a fixed address or a DHCP reservation.
+- The **WiNet-S** Ethernet port and Wi-Fi dongle also work, but are generally
+  slower, expose fewer registers, and may need a larger message gap.
+- You need, per inverter: **host**, **port** (normally `502`), **unit ID**
+  (`1`–`247`) and a **message gap** (start at `0.005` s on LAN, higher for
+  WiNet-S). All four are entered when you add the integration.
+- The Modbus TCP connection is owned by Home Assistant's built-in `modbus`
+  integration. This custom integration declares it as a dependency and does not
+  install a second copy.
+- Use one config entry per inverter serial, and disable any other Sungrow polling
+  first so two clients do not contend for the connection.
+
+The upstream project documents the physical side with diagrams — the SHxRT
+connections overview and the inverter LAN port figure, in
+[mkaiser/Sungrow-SHx-Inverter-Modbus-Home-Assistant](https://github.com/mkaiser/Sungrow-SHx-Inverter-Modbus-Home-Assistant#1-overview).
+This repository links to those images rather than redistributing them.
+
 ## Testing build limitations
 
 - No physical-inverter validation. Register semantics come from the source YAML
@@ -86,10 +109,26 @@ Batteryless installations work with battery-dependent data unavailable as
 appropriate. Internal LAN is preferred; WiNet-S may expose fewer/slower readings.
 iHomeManager, wallboxes and Logger1000 are not supported.
 
-[Installation, Energy Dashboard, controls and troubleshooting](docs/USER_GUIDE.md) ·
+[Installation, controls and troubleshooting](docs/USER_GUIDE.md) ·
+[Dashboards and Energy Dashboard](docs/DASHBOARD.md) ·
 [Source coverage](docs/SOURCE_COVERAGE.md) ·
 [Optional helpers](docs/OPTIONAL_HELPERS.md) ·
 [Review findings](docs/REVIEW.md) · [Validation](docs/VALIDATION.md)
+
+## Tested configuration
+
+The maintainer develops and tests against this installation:
+
+| Component | Detail |
+| --- | --- |
+| PV | 35 × 470 W Jinko Solar Tiger Neo, monocrystalline (JKM470N-48HL4M-DV) |
+| Inverter | Sungrow SH20T (AS4777-2 2020), 20 kW, three-phase |
+| Battery | Sungrow SBH300, 30 kWh usable, LiFePO4 |
+
+One installation on one model is not a compatibility guarantee. The register map
+covers 40 model codes with model-aware entity filtering, but models differ in which
+registers they expose. If you run this integration, please report your model code
+and firmware so the list can be extended.
 
 ## Development and publication
 
