@@ -65,10 +65,6 @@ This repository links to those images rather than redistributing them.
 
 - No physical-inverter validation. Register semantics come from the source YAML
   map and the manufacturer's documented register list.
-- Registers `33046`/`33047` use a **10 W step**. Sungrow's *Communication Protocol of
-  Residential Hybrid Inverter* V1.1.11 specifies 0.01 kW per count for registers
-  33047/33048, and 0.01 kW = 10 W — matching the `scale: 10` the source map applies.
-  The `scale=100` comment in that file is a units error, so do not "correct" it to 100.
 - iHomeManager, Logger1000, wallboxes and the iSolarCloud cloud API are not supported.
 - Requires Home Assistant 2026.9.2+ and HACS 2.0.0+.
 
