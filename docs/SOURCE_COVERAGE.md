@@ -1,8 +1,8 @@
 # Revision scope note
 
-The inventory below describes the **full community/follow-up build**. The first
-Core submission deliberately exposes only the sensor subset listed in that
-folder's README. No original register definitions were dropped from the library.
+The inventory below describes the single Core/HACS build. Both deliveries expose
+the same feature set; there is no longer a sensor-only Core subset. No original
+register definitions were dropped from the library.
 Energy totals now retain their cached value internally while presenting
 unavailable during outages. Phase V×I now uses its magnitude.
 

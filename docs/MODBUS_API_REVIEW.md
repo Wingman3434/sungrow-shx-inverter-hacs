@@ -90,6 +90,6 @@ stable Home Assistant runtimes. Real inverter/firmware compatibility, gateway
 timing, HACS catalog registration, hosted Actions and PyPI publishing remain
 external checks. Nothing in this task connects to or modifies a live inverter.
 
-Re-reviewed 2026-09-14: the new domain is sungrow_shx_inverter; the first Core
-submission polls only components needed by its initial sensor set. Full HACS
-and the follow-up retain all cohorts. Energy caching does not imply availability.
+Re-reviewed 2026-09-14: the new domain is sungrow_shx_inverter; the Core and HACS
+builds poll all cohorts their platforms use. Energy caching does not imply
+availability.

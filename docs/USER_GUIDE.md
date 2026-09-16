@@ -147,7 +147,7 @@ Compare model/serial, signs, energy totals and power with local inverter reading
 allowing for app update delays. Verify restart and connection-loss recovery.
 Then test one normally used control at a time and restore its original setting.
 
-Check Settings → System → Logs for this integration. Full HACS/follow-up builds
+Check Settings → System → Logs for this integration. The HACS and Core builds
 provide downloadable diagnostics with host and serial identity omitted, including
 raw serial words. Include firmware, model, interface, versions, expected/actual
 behaviour, and a redacted diagnostic file in a report to **this project's**

@@ -1,4 +1,4 @@
-For the full HACS/follow-up build only; the sensor-first Core build has no control or binary-sensor platforms.
+Applies to the full HACS/Core build. The common mode presets are built into the integration; this generator is only for the extra dashboard helpers.
 
 # Optional UI helpers
 
