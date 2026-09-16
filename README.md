@@ -11,26 +11,22 @@ storage, backup, operating state and firmware. Based on
 Includes model-aware entities and optional helpers for the source's energy
 dashboard and EMS preset use cases; it does not install the upstream dashboards.
 
-**Community testing build 0.0.5. Requires Home Assistant 2026.9.2+.**
+**Community testing build. Requires Home Assistant 2026.9.2+.**
 Tested only on the maintainer's installation (see [Tested configuration](#tested-configuration)).
 Other inverter models are unverified — please test and raise issues or pull requests.
-
-> **Agent context:** `../CONTEXT_PACK.md` at the delivery repository root gives the
-> project overview, architecture, data models and workflows for onboarding a new
-> session. It sits outside this folder and is not shipped with it.
 
 ## Install (HACS, custom repository)
 
 1. HACS → ⋮ (top right) → **Custom repositories**
 2. Repository: `https://github.com/Wingman3434/sungrow-shx-inverter-hacs`
    Type: **Integration** → **Add**
-3. Search HACS for **Sungrow SHx Inverter** → **Download** → pick `0.0.5`
+3. Search HACS for **Sungrow SHx Inverter** → **Download** → pick the latest version
 4. Restart Home Assistant
 5. Settings → Devices & services → **Add integration** → *Sungrow SHx Inverter*
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Wingman3434&repository=sungrow-shx-inverter-hacs&category=integration)
 
-**Version 0.0.5 is a community testing build.** It has been exercised only on the
+**This is a community testing build.** It has been exercised only on the
 maintainer's SH20T installation; no other hardware has been tested. Read the
 limitations below before installing.
 
@@ -120,7 +116,7 @@ iHomeManager, wallboxes and Logger1000 are not supported.
 [Dashboards and Energy Dashboard](docs/DASHBOARD.md) ·
 [Source coverage](docs/SOURCE_COVERAGE.md) ·
 [Optional helpers](docs/OPTIONAL_HELPERS.md) ·
-[Review findings](docs/REVIEW.md) · [Validation](docs/VALIDATION.md)
+[Validation record (0.0.2 delivery)](docs/VALIDATION.md)
 
 ## Tested configuration
 
@@ -149,39 +145,31 @@ Pull requests that extend model coverage, correct register handling, or improve
 these docs are welcome. See [Reporting issues](#reporting-issues) for what to
 include.
 
-## Development and publication
+## Development
 
-Run `scripts/setup`, `.venv/bin/pytest`, and `scripts/lint`.
-`scripts/develop` starts a disposable configuration, not your live installation.
-Refresh the private library with:
+Run `scripts/setup`, then `.venv/bin/pytest` and `scripts/lint`. `scripts/develop`
+starts a disposable Home Assistant configuration rather than your live
+installation. Refresh the vendored library with:
 
 ```sh
 python scripts/vendor.py --source ../sungrow-shx-inverter-library
 python scripts/vendor.py --check
 ```
 
-Workflows retain the integration_blueprint lint, hassfest and HACS validation
-pattern, with runtime tests and vendor hash verification. Local brand assets
-are included. The built-in Modbus dependency owns its transport package version.
+CI runs lint, hassfest, HACS validation and the test suite, and rejects drift in
+the vendored library hashes.
 
-Publish the repository contents, including hidden files, not the outer
-three-folder archive. Apply the description/topics from repository-settings.json,
-enable issues, run hosted checks, then create a full GitHub release matching the
-manifest version. A repository's existence, hosted checks and release are
-unverified until publication.
-
-**HACS default catalogue:** custom integrations used to alpha/beta-test Core
-integrations or override Core integrations are not accepted as defaults.
-Use the custom-repository route for this project. Core acceptance is a separate
-process; no catalogue listing is promised.
+This integration is **not** in the HACS default catalogue — custom integrations
+used to test or override Core integrations are not accepted there. Install it
+through the custom-repository route above.
 
 ## Versioning
 
-Deliveries use `Major.Minor.Fix`, starting at `0.0.1`. The integration manifest
-`version` and the GitHub release tag identify the published build, so this build
-is `0.0.5`. The Core delivery ships the **same version and the same patch set**.
-The PyPI library is versioned independently by its own release tag, so the
-manifest pin (`sungrow-shx-inverter==0.1.0`) does not follow this scheme.
+Versions follow `Major.Minor.Fix`. The integration manifest `version` and the
+GitHub release tag both identify a build, and the two always match — check the
+latest release rather than this file. The standalone library is versioned
+independently by its own release tag, so the manifest pin
+(`sungrow-shx-inverter==0.1.0`) does not follow this scheme.
 
 ## AI-assisted development
 

@@ -11,7 +11,7 @@ Provide a minimal reproduction and expected versus observed register values.
 Edit the standalone sungrow-shx-inverter library first for protocol changes, run its
 tests, then run: python scripts/vendor.py --source ../sungrow-shx-inverter-library
 The vendor manifest records hashes; CI rejects drift. Entity/UI changes belong
-in the Core follow-up tree first and are mirrored to this custom integration.
+in the Core submission tree first and are mirrored to this custom integration.
 Keep the focused initial Core submission independently scoped.
 Do not submit the _vendor directory to Home Assistant core.
 

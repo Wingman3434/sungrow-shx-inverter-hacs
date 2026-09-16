@@ -1,4 +1,9 @@
-# Validation — 2026-09-14 revised delivery
+# Validation record — 0.0.2 delivery (2026-09-14)
+
+> **Point-in-time record.** This documents the local checks run for the 0.0.2
+delivery. Test counts and coverage figures below reflect that revision and have
+since changed; the CI runs on `main` are the current result. The hosted checks and
+publication items listed as outstanding at the end were completed on 2026-09-16.
 
 ## Completed local checks
 
@@ -44,7 +49,7 @@ that all hardware states or regressions have been tested.
 The quality file keeps `brands` and `dependency-transparency` as `todo`:
 the new brand domain and renamed public library/issue tracker are prepared
 locally but not published. Accordingly **Core hassfest is not wholly green**.
-Its exact quality-scale errors are retained in validation-logs/hassfest-core.log.
+Its exact quality-scale errors are recorded with the Core delivery's own notes.
 Do not change these to done until those publication prerequisites really exist.
 
 HACS hassfest sees the temporary Core overlay and warns of the shared domain.
@@ -112,8 +117,8 @@ multiples of 10 W. Only the forced charge/discharge setpoint is 1 W capable.
 ## Built-in operating presets
 
 Users previously had to run `scripts/generate_helpers.py` to get mode presets.
-That does not scale to a HACS install, and the research in this session
-espablished that Home Assistant exposes no supported way for an integration to
+That does not scale to a HACS install, and research established that Home
+Assistant exposes no supported way for an integration to
 create `input_boolean`/`input_number` helpers (those domains ship no config
 flow), so a "setup helpers" button was not viable.
 
@@ -166,7 +171,7 @@ Explicit values are unchanged and still require exact confirmation. Covered by
 - No hardware tests, live installation, inverter reads/writes or configuration
   migrations. Midnight/reconnect/firmware/interface behaviour requires field testing.
 - No GitHub repository, issue, PR, release, PyPI upload, brand registration or
-  HACS catalogue submission. repository-settings.json is a concrete preview.
+  HACS catalogue submission.
 - Hosted Actions, HACS repository checks, a documentation-site build, and the
   whole-repository Core pre-commit/test suite have not run.
 - Strict mypy is scoped to the new integration with imported modules silenced.
