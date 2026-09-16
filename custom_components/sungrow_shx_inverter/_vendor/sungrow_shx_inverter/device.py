@@ -1,9 +1,11 @@
 """Typed residential hybrid inverter over an injected Modbus unit."""
 
+import logging
 from asyncio import Lock, sleep
 from collections.abc import Iterable
 
 from modbus_connection import (
+    IllegalDataAddressError,
     ModbusConnectionError,
     ModbusError,
     ModbusTimeoutError,
@@ -36,13 +38,14 @@ from .inverter_firmware import InverterFirmware
 from .inverter_temperature import InverterTemperature
 from .legacy_firmware import LegacyFirmware
 from .load_settings import LoadSettings
-from .meter_electrical import MeterElectrical
 from .meter_power import MeterPower
 from .model import SungrowComponent, UpdateReport, bounded
 from .pv import Pv
 from .software import Software
 from .state import State
 from .variants import Model, UnsupportedDeviceError, identify
+
+_LOGGER = logging.getLogger(__name__)
 
 
 class SungrowSHxInverter:
@@ -58,6 +61,7 @@ class SungrowSHxInverter:
         self._unit = unit
         self._lock = Lock()
         self.profile: Model | None = None
+        self.absent: set[str] = set()
         self._battery_max_power = (
             None if battery_max_power is None else bounded(10, 65535)(battery_max_power)
         )
@@ -80,7 +84,6 @@ class SungrowSHxInverter:
         self.export_bounds = ExportBounds(unit)
         self.battery_info = BatteryInfo(unit)
         self.backup = Backup(unit)
-        self.meter_electrical = MeterElectrical(unit)
         self.state = State(unit)
         self.energy = Energy(unit)
         self.grid_flow = GridFlow(unit)
@@ -111,7 +114,6 @@ class SungrowSHxInverter:
             "export_bounds": self.export_bounds,
             "battery_info": self.battery_info,
             "backup": self.backup,
-            "meter_electrical": self.meter_electrical,
             "state": self.state,
             "energy": self.energy,
             "grid_flow": self.grid_flow,
@@ -142,7 +144,6 @@ class SungrowSHxInverter:
             "export_bounds": 600,
             "battery_info": 600,
             "backup": 10,
-            "meter_electrical": 10,
             "state": 5,
             "energy": 600,
             "grid_flow": 10,
@@ -231,11 +232,17 @@ class SungrowSHxInverter:
             self.profile = profile
 
     async def async_update_components(self, names: Iterable[str]) -> UpdateReport:
-        """Refresh selected subsystems, retaining failed values without notifying."""
+        """Refresh selected subsystems, retaining failed values without notifying.
+
+        A subsystem the device answers with an illegal-data-address exception is
+        not polled again: the block is absent from this device rather than
+        failing, so retrying it would only repeat the same refusal.
+        """
         names = tuple(names)  # Snapshot before identification restricts the map.
         await self.async_identify()
         updated: set[str] = set()
         failed: dict[str, ModbusError] = {}
+        absent: list[str] = []
         async with self._lock:
             for name in dict.fromkeys(names):
                 if name not in self.components:
@@ -244,6 +251,9 @@ class SungrowSHxInverter:
                     await self.components[name].async_update(notify=False)
                 except ModbusConnectionError:
                     raise
+                except IllegalDataAddressError:
+                    absent.append(name)
+                    continue
                 except ModbusTimeoutError as err:
                     if not updated:
                         raise
@@ -252,9 +262,21 @@ class SungrowSHxInverter:
                     failed[name] = err
                 else:
                     updated.add(name)
+            for name in absent:
+                self._forget_absent(name)
             for name in updated:
                 self.components[name].notify()
         return UpdateReport(updated, failed)
+
+    def _forget_absent(self, name: str) -> None:
+        """Stop serving a subsystem the device says it does not implement."""
+        self.components.pop(name, None)
+        self.intervals.pop(name, None)
+        self.absent.add(name)
+        _LOGGER.info(
+            "Sungrow %s is not implemented by this device; it will not be polled",
+            name,
+        )
 
     async def async_update(self) -> UpdateReport:
         """Refresh every served subsystem."""
@@ -310,14 +332,26 @@ class SungrowSHxInverter:
         async with self._lock:
             await self._unit.write_register(12999, int(command))
 
-    async def async_read_raw(self) -> dict[str, dict[int, int | bool]]:
-        """Read the served map for diagnostics; never read a command-only register."""
+    async def async_read_raw(
+        self,
+    ) -> tuple[dict[str, dict[int, int | bool]], dict[str, str]]:
+        """Read the served map for diagnostics; never read a command-only register.
+
+        Returns the raw words plus the subsystems this device refused, keyed to
+        the exception type name, so one absent block cannot empty the snapshot.
+        """
         await self.async_identify()
         raw: dict[str, dict[int, int | bool]] = {}
+        unreadable: dict[str, str] = {}
         async with self._lock:
-            for component in self.components.values():
-                for space, words in (
-                    await component.async_read_raw(notify=False)
-                ).items():
+            for name, component in self.components.items():
+                try:
+                    blocks = await component.async_read_raw(notify=False)
+                except ModbusConnectionError:
+                    raise
+                except ModbusError as err:
+                    unreadable[name] = type(err).__name__
+                    continue
+                for space, words in blocks.items():
                     raw.setdefault(space, {}).update(words)
-        return raw
+        return raw, unreadable

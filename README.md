@@ -86,9 +86,11 @@ and include:
 
 ## What is included
 
-- Full six-platform implementation: 120 sensor descriptions, seven binary flags,
+- Full six-platform implementation: 114 sensor descriptions, seven binary flags,
   nine numbers, three switches, three register-backed selects, a composed
   **Operating preset** selector and two opt-in command buttons.
+- Register blocks your inverter does not implement are detected and skipped, so an
+  unsupported group is never created as permanently unavailable entities.
 - One-tap mode presets built in: self-consumption (max/no battery discharge),
   zero/max export, battery bypass and forced charge/discharge, applied as the
   source scenes were and reading the inverter's live limits. No generated

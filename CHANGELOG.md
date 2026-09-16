@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.0.6 — community testing build
+
+- **Diagnostics are usable again on this inverter.** The raw register dump
+  aborted on the first block the device declined, so the export came back with an
+  empty snapshot. It now keeps every readable register and separately names the
+  blocks the inverter refused.
+- **Unsupported blocks are detected instead of assumed.** When a unit answers a
+  register block with an illegal-data-address exception — a block that model does
+  not implement, such as the legacy version strings on an SH20T — the block is
+  treated as absent: it is dropped from polling, recorded once in the log, and its
+  entities are never created. Previously the block failed on every poll cycle
+  forever and its entities sat permanently unavailable. This also stops the
+  integration from guessing support from the model code alone.
+- **Removed: the six meter phase V×I sensors** (input 5740–5745) and the register
+  block behind them. The maintainer's SH20T declines that block while every
+  neighbouring meter register answers, so the sensors could never report. Meter
+  and per-phase *power* (5600/5602/5604/5606) are unaffected.
+
 ## 0.0.5 — community testing build
 
 - Brand assets: the icon now has a transparent background (the white was keyed

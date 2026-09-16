@@ -201,24 +201,6 @@
       "total_backup_power": {
         "name": "Total backup power"
       },
-      "meter_phase_a_voltage": {
-        "name": "Meter phase A voltage"
-      },
-      "meter_phase_b_voltage": {
-        "name": "Meter phase B voltage"
-      },
-      "meter_phase_c_voltage": {
-        "name": "Meter phase C voltage"
-      },
-      "meter_phase_a_current": {
-        "name": "Meter phase A current"
-      },
-      "meter_phase_b_current": {
-        "name": "Meter phase B current"
-      },
-      "meter_phase_c_current": {
-        "name": "Meter phase C current"
-      },
       "running_state_raw": {
         "name": "Running state raw"
       },

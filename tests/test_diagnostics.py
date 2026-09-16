@@ -22,8 +22,13 @@ async def test_diagnostics_redact_raw_serial_and_errors(
     assert not any(a in result["raw"]["input"] for a in range(4989, 4999))
     assert SERIAL not in str(result)
     assert "192.0.2.2" not in str(result)
+    assert result["absent"] == []
+    assert result["unreadable"] == {}
+    assert result["read_error"] is None
     connection.for_unit(1).fail_requests(ModbusTimeoutError("host=192.0.2.2"))
     result = await async_get_config_entry_diagnostics(hass, init_integration)
-    assert result["read_error"] == "ModbusTimeoutError"
+    # One refused block is named rather than emptying the whole snapshot.
+    assert result["read_error"] is None
+    assert set(result["unreadable"].values()) == {"ModbusTimeoutError"}
     assert result["raw"] == {}
     assert "192.0.2.2" not in str(result)

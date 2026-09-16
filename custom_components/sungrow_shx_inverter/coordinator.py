@@ -98,9 +98,19 @@ class SungrowCoordinator(DataUpdateCoordinator[UpdateReport]):
         self._fresh.difference_update(report.failed)
         self._fresh.update(report.updated)
         self._failed.update(report.failed)
+        # A subsystem the device dropped mid-poll is neither fresh nor failing.
+        served = self.device.components.keys()
+        self._fresh = {name for name in self._fresh if name in served}
+        self._failed = {
+            name: err for name, err in self._failed.items() if name in served
+        }
         finished = monotonic()
         for name in due:
-            self._next[name] = finished + self.device.intervals[name]
+            interval = self.device.intervals.get(name)
+            if interval is None:
+                self._next.pop(name, None)
+                continue
+            self._next[name] = finished + interval
         return UpdateReport(set(self._fresh), dict(self._failed))
 
     async def async_refresh_components(self, *names: str) -> None:

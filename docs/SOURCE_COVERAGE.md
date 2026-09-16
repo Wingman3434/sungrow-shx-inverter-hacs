@@ -13,7 +13,7 @@ Source: source/modbus_sungrow.yaml (90066 bytes), SHA-256 4c1580bb02cd2e6213ea5f
 
 | Source item | Count | Destination |
 | --- | ---: | --- |
-| Active Modbus sensors | 99 | Typed library fields and core sensor descriptions |
+| Active Modbus sensors | 93 of 99 | Typed library fields and core sensor descriptions; the six meter phase V×I registers (5740–5745) are deliberately not exposed |
 | Direct Modbus switches | 3 | Switch entities, 0xAA/0x55 write/readback |
 | Arithmetic/status template sensors | 21 | Library derived properties and core sensors |
 | Immediate power-flow binary sensors | 7 | Library derived properties and core binary sensors |
@@ -30,6 +30,8 @@ Source: source/modbus_sungrow.yaml (90066 bytes), SHA-256 4c1580bb02cd2e6213ea5f
 
 - Reactive power: var/reactive_power, not W/power.
 - Phase V×I: VA/apparent_power, not measured active power. The calculations remain unchanged.
+- Meter phase V×I (input 5740–5745): not shipped. The maintainer's inverter refuses that block while every neighbouring meter register answers, and the source map credits it to a forum post rather than the protocol document. Per-phase meter power (5600/5602/5604/5606) is unaffected.
+- A register block the device itself refuses (illegal data address) is treated as absent rather than failing: it is dropped from polling and its entities are never created, so a model whose register map differs from the source needs no special case.
 - Maximum charge/discharge power: 10 W step, so the source's 10 W minimum and 0.01 kW resolution are representable (source UI step 100 was inconsistent).
 - Unknown selects remain unknown; no silent fallback to self-consumption or stop.
 - Unsupported fields are excluded by model identity, rather than displayed as zero or 6553.5.
@@ -98,12 +100,6 @@ input addresses 4989–4998, all host settings and exception text.
 | sg_backup_phase_b_power | backup.backup_phase_b_power | backup_phase_b_power |
 | sg_backup_phase_c_power | backup.backup_phase_c_power | backup_phase_c_power |
 | sg_total_backup_power | backup.total_backup_power | total_backup_power |
-| sg_meter_phase_a_voltage | meter_electrical.meter_phase_a_voltage | meter_phase_a_voltage |
-| sg_meter_phase_b_voltage | meter_electrical.meter_phase_b_voltage | meter_phase_b_voltage |
-| sg_meter_phase_c_voltage | meter_electrical.meter_phase_c_voltage | meter_phase_c_voltage |
-| sg_meter_phase_a_current | meter_electrical.meter_phase_a_current | meter_phase_a_current |
-| sg_meter_phase_b_current | meter_electrical.meter_phase_b_current | meter_phase_b_current |
-| sg_meter_phase_c_current | meter_electrical.meter_phase_c_current | meter_phase_c_current |
 | uid_sg_running_state_raw | state.running_state_raw | running_state_raw |
 | uid_power_flow_status | state.power_flow_status | power_flow_status |
 | sg_daily_pv_generation | energy.daily_pv_generation | daily_pv_generation |
