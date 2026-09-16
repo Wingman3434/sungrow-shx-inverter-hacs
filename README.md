@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="custom_components/sungrow_shx_inverter/brand/logo.png" alt="Sungrow SHx Inverter" width="180">
+</p>
+
 # Sungrow SHx Inverter
 
 Local Modbus monitoring and EMS controls for Sungrow residential hybrid
@@ -7,7 +11,7 @@ storage, backup, operating state and firmware. Based on
 Includes model-aware entities and optional helpers for the source's energy
 dashboard and EMS preset use cases; it does not install the upstream dashboards.
 
-**Community testing build 0.0.3. Requires Home Assistant 2026.9.2+.**
+**Community testing build 0.0.4. Requires Home Assistant 2026.9.2+.**
 Tested only on the maintainer's installation (see [Tested configuration](#tested-configuration)).
 Other inverter models are unverified — please test and raise issues or pull requests.
 
@@ -20,13 +24,13 @@ Other inverter models are unverified — please test and raise issues or pull re
 1. HACS → ⋮ (top right) → **Custom repositories**
 2. Repository: `https://github.com/Wingman3434/sungrow-shx-inverter-hacs`
    Type: **Integration** → **Add**
-3. Search HACS for **Sungrow SHx Inverter** → **Download** → pick `0.0.3`
+3. Search HACS for **Sungrow SHx Inverter** → **Download** → pick `0.0.4`
 4. Restart Home Assistant
 5. Settings → Devices & services → **Add integration** → *Sungrow SHx Inverter*
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Wingman3434&repository=sungrow-shx-inverter-hacs&category=integration)
 
-**Version 0.0.3 is a community testing build.** It has been exercised only on the
+**Version 0.0.4 is a community testing build.** It has been exercised only on the
 maintainer's SH20T installation; no other hardware has been tested. Read the
 limitations below before installing.
 
@@ -174,7 +178,7 @@ process; no catalogue listing is promised.
 
 Deliveries use `Major.Minor.Fix`, starting at `0.0.1`. The integration manifest
 `version` and the GitHub release tag identify the published build, so this build
-is `0.0.3`. The Core delivery ships the **same version and the same patch set**.
+is `0.0.4`. The Core delivery ships the **same version and the same patch set**.
 The PyPI library is versioned independently by its own release tag, so the
 manifest pin (`sungrow-shx-inverter==0.1.0`) does not follow this scheme.
 

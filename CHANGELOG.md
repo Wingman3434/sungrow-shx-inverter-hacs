@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.0.4 — community testing build
+
+- Brand assets: the integration now ships its own icons and logos
+  (`brand/icon.png`, `icon@2x.png`, `logo.png`, `logo@2x.png`), replacing the
+  placeholder artwork. Home Assistant and HACS show these from the installed
+  version, so they arrive with this release.
+- README displays the logo.
+- `scripts/setup` probes for a Python 3.14.2+ interpreter instead of assuming the
+  `python3` on `PATH` qualifies, so the documented test environment can be
+  recreated on machines where `python3` is older (for example Python 3.13 with
+  `python3.14` installed alongside).
+- NOTICE records the artwork provenance.
+
 ## 0.0.3 — community testing build
 
 Documentation release on top of 0.0.2, plus the regression test for the

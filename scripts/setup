@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-python3 -c 'import sys; sys.version_info >= (3, 14, 2) or sys.exit("Python 3.14.2 or newer is required")'
-python3 -m venv .venv
+# The project floor is Python 3.14.2. CI runs `python3` directly; locally the
+# system `python3` is often older while a suitable interpreter sits alongside it
+# (for example python3.14), so probe instead of failing on the first candidate.
+PYTHON=""
+for candidate in python3 python3.16 python3.15 python3.14; do
+  command -v "$candidate" >/dev/null 2>&1 || continue
+  if "$candidate" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 14, 2) else 1)' 2>/dev/null; then
+    PYTHON="$candidate"
+    break
+  fi
+done
+if [ -z "$PYTHON" ]; then
+  echo "Python 3.14.2 or newer is required. Found: $(python3 --version 2>&1)" >&2
+  exit 1
+fi
+echo "Using $PYTHON ($("$PYTHON" --version 2>&1))"
+"$PYTHON" -m venv .venv
 .venv/bin/python -m pip install -r requirements_common.txt
 .venv/bin/python -m pip install -r requirements_dev.txt
