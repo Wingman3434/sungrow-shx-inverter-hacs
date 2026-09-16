@@ -126,6 +126,12 @@ version (`sungrow-shx-inverter-hacs-0.0.2`) and the integration manifest
 independently by its own release tag, so the manifest pin
 (`sungrow-shx-inverter==0.1.0`) does not follow this scheme.
 
+## AI-assisted development
+
+This integration has been built with AI assistance under my direction. I review,
+test and take responsibility for everything in this repository, including code
+quality. I also manage GitHub issues and pull requests.
+
 ## Attribution
 
 Integration Apache-2.0; vendored library Apache-2.0 with MIT register-map portions.
