@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.0.3 — community testing build
+
+Documentation release on top of 0.0.2, plus the regression test for the
+translation defect found during publication.
+
+- README: new **Tested configuration** section recording the maintainer's
+  installation — the only setup this build has been tested on — and an explicit
+  request for other owners to test and raise issues or pull requests.
+- README: new **Connection overview** section.
+- New `docs/DASHBOARD.md`: Energy Dashboard field mapping and optional Lovelace
+  layouts, migrated from the upstream YAML package, with model-specific entity IDs
+  and instructions to confirm your own.
+- User guide: upstream scene → built-in preset migration table.
+- Tests: added a regression test asserting the `strings.json` exception shape and
+  that `translations/en.json` stays byte-identical to it.
+- README: documented AI-assisted development.
+
 ## 0.0.2 — community testing build
 
 - First public testing release.

@@ -7,8 +7,9 @@ storage, backup, operating state and firmware. Based on
 Includes model-aware entities and optional helpers for the source's energy
 dashboard and EMS preset use cases; it does not install the upstream dashboards.
 
-**Community testing build 0.0.2. Requires Home Assistant 2026.9.2+.**
-No physical inverter validation or publication is claimed.
+**Community testing build 0.0.3. Requires Home Assistant 2026.9.2+.**
+Tested only on the maintainer's installation (see [Tested configuration](#tested-configuration)).
+Other inverter models are unverified — please test and raise issues or pull requests.
 
 > **Agent context:** `../CONTEXT_PACK.md` at the delivery repository root gives the
 > project overview, architecture, data models and workflows for onboarding a new
@@ -19,14 +20,15 @@ No physical inverter validation or publication is claimed.
 1. HACS → ⋮ (top right) → **Custom repositories**
 2. Repository: `https://github.com/Wingman3434/sungrow-shx-inverter-hacs`
    Type: **Integration** → **Add**
-3. Search HACS for **Sungrow SHx Inverter** → **Download** → pick `0.0.2`
+3. Search HACS for **Sungrow SHx Inverter** → **Download** → pick `0.0.3`
 4. Restart Home Assistant
 5. Settings → Devices & services → **Add integration** → *Sungrow SHx Inverter*
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Wingman3434&repository=sungrow-shx-inverter-hacs&category=integration)
 
-**Version 0.0.2 is a community testing build.** It has not been validated on
-physical hardware. Read the limitations below before installing.
+**Version 0.0.3 is a community testing build.** It has been exercised only on the
+maintainer's SH20T installation; no other hardware has been tested. Read the
+limitations below before installing.
 
 Add the integration through Settings → Devices & services. Enter host, port,
 unit ID and message gap in seconds. Set any optional battery power cap through
@@ -125,10 +127,22 @@ The maintainer develops and tests against this installation:
 | Inverter | Sungrow SH20T (AS4777-2 2020), 20 kW, three-phase |
 | Battery | Sungrow SBH300, 30 kWh usable, LiFePO4 |
 
-One installation on one model is not a compatibility guarantee. The register map
-covers 40 model codes with model-aware entity filtering, but models differ in which
-registers they expose. If you run this integration, please report your model code
-and firmware so the list can be extended.
+This is the **only** installation this integration has been tested on. It is one
+data point, not a compatibility guarantee. The register map covers 40 model codes
+with model-aware entity filtering, but models differ in which registers they
+expose, and several behaviours — midnight rollover, reconnect handling, firmware
+differences — remain unverified.
+
+**Testing and bug reports are wanted.** If you run this on another model, please
+open an issue or pull request with:
+
+- your inverter model code and firmware version,
+- whether you use the internal LAN port or WiNet-S,
+- which entities and controls work, which do not, and the diagnostics dump.
+
+Pull requests that extend model coverage, correct register handling, or improve
+these docs are welcome. See [Reporting issues](#reporting-issues) for what to
+include.
 
 ## Development and publication
 
@@ -158,12 +172,11 @@ process; no catalogue listing is promised.
 
 ## Versioning
 
-Deliveries use `Major.Minor.Fix`, starting at `0.0.1`. The folder name carries the
-version (`sungrow-shx-inverter-hacs-0.0.2`) and the integration manifest
-`version` matches it, so this build is `0.0.2`. The Core delivery ships the
-**same version and the same patch set**. The PyPI library is versioned
-independently by its own release tag, so the manifest pin
-(`sungrow-shx-inverter==0.1.0`) does not follow this scheme.
+Deliveries use `Major.Minor.Fix`, starting at `0.0.1`. The integration manifest
+`version` and the GitHub release tag identify the published build, so this build
+is `0.0.3`. The Core delivery ships the **same version and the same patch set**.
+The PyPI library is versioned independently by its own release tag, so the
+manifest pin (`sungrow-shx-inverter==0.1.0`) does not follow this scheme.
 
 ## AI-assisted development
 
