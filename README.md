@@ -152,7 +152,7 @@ starts a disposable Home Assistant configuration rather than your live
 installation. Refresh the vendored library with:
 
 ```sh
-python scripts/vendor.py --source ../sungrow-shx-inverter-library
+python scripts/vendor.py --source ../library
 python scripts/vendor.py --check
 ```
 

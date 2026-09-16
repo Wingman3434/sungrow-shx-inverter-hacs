@@ -9,7 +9,7 @@ Do not include credentials, host addresses or inverter serials in public issues.
 Provide a minimal reproduction and expected versus observed register values.
 
 Edit the standalone sungrow-shx-inverter library first for protocol changes, run its
-tests, then run: python scripts/vendor.py --source ../sungrow-shx-inverter-library
+tests, then run: python scripts/vendor.py --source ../library
 The vendor manifest records hashes; CI rejects drift. Entity/UI changes belong
 in the Core submission tree first and are mirrored to this custom integration.
 Keep the focused initial Core submission independently scoped.
