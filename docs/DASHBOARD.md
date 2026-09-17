@@ -6,8 +6,10 @@ dashboards at this integration's entities. This document **complements**
 "Full community controls and helpers" sections, which remain the authority on
 signs, caching and controls. Read those first if you have not.
 
-Nothing here has been run on a physical inverter. The entity IDs below are
-**derived from the source code**, not confirmed against a live installation.
+The entity IDs and names below are confirmed against the maintainer's live SH20T
+(integration 0.1.2, from its device page and Developer Tools → States). The dashboard
+YAML itself has **not** been built on a live installation — verify each entity ID before
+relying on it.
 
 ## Entity IDs are model-specific
 
