@@ -22,7 +22,6 @@ from .battery_info import BatteryInfo
 from .battery_limits import BatteryLimits
 from .battery_settings import BatterySettings
 from .battery_status import BatteryStatus
-from .battery_thresholds import BatteryThresholds
 from .combined_energy import CombinedEnergy
 from .communication_firmware import CommunicationFirmware
 from .derived import DerivedReadings
@@ -99,7 +98,6 @@ class SungrowSHxInverter:
         self.battery_firmware = BatteryFirmware(unit)
         self.apl = Apl(unit)
         self.battery_limits = BatteryLimits(unit)
-        self.battery_thresholds = BatteryThresholds(unit)
         self.derived = DerivedReadings(self)
         self.components: dict[str, SungrowComponent] = {
             "legacy_firmware": self.legacy_firmware,
@@ -129,7 +127,6 @@ class SungrowSHxInverter:
             "battery_firmware": self.battery_firmware,
             "apl": self.apl,
             "battery_limits": self.battery_limits,
-            "battery_thresholds": self.battery_thresholds,
         }
         self.intervals: dict[str, int] = {
             "legacy_firmware": 600,
@@ -159,7 +156,6 @@ class SungrowSHxInverter:
             "battery_firmware": 600,
             "apl": 10,
             "battery_limits": 10,
-            "battery_thresholds": 10,
         }
 
     @property
@@ -214,10 +210,6 @@ class SungrowSHxInverter:
                         component_name.endswith("_firmware")
                         and component_name != "legacy_firmware"
                         and not profile.extended_firmware
-                    )
-                    or (
-                        component_name == "battery_thresholds"
-                        and not profile.start_thresholds
                     )
                     or (
                         component_name == "active_limitation"

@@ -342,12 +342,6 @@
       "battery_max_discharge_power": {
         "name": "Battery max discharge power"
       },
-      "battery_charging_start_power": {
-        "name": "Battery charging start power"
-      },
-      "battery_discharging_start_power": {
-        "name": "Battery discharging start power"
-      },
       "mppt1_power": {
         "name": "MPPT1 power"
       },
@@ -444,12 +438,6 @@
       },
       "battery_reserved_soc_for_backup": {
         "name": "Battery Reserved SoC for Backup"
-      },
-      "battery_charging_start_power": {
-        "name": "Battery charging start power"
-      },
-      "battery_discharging_start_power": {
-        "name": "Battery discharging start power"
       },
       "battery_forced_charge_discharge_power": {
         "name": "Battery forced charge discharge power"

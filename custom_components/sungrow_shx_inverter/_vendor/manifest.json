@@ -18,11 +18,10 @@
     "sungrow_shx_inverter/battery_limits.py": "be2ac52a042004ad5530c4e3b16ebf18e1071954fd2b6c44be253688a08ed9bd",
     "sungrow_shx_inverter/battery_settings.py": "6e3ddc766bf0c2c412334b6a5209be12f46ef0b65946e731758436eb19d12c67",
     "sungrow_shx_inverter/battery_status.py": "a7e43028b7b10fb9c6a2af200a9fe0a0ed9ba25192636f956c8207789053a25f",
-    "sungrow_shx_inverter/battery_thresholds.py": "cc91bd1276b68f6d825394b5a90a8d058d5dd0ebf6be3b312cdf0a95c9b0b954",
     "sungrow_shx_inverter/combined_energy.py": "d54213694482d9bc438306350540b94005af22eae831a4912d4a2d561f7f9a7b",
     "sungrow_shx_inverter/communication_firmware.py": "a9190eb1de30c402d5cbcb6f21ea4f23c638c35150228e02ec16c8b3036baff8",
     "sungrow_shx_inverter/derived.py": "00ad72410675626b3463234905c1b00c2cbc1e41c941fe1d7f27734fcca3756d",
-    "sungrow_shx_inverter/device.py": "211376832310e67811f742ca68094f2d3765017eacdbb026b60b13173043286c",
+    "sungrow_shx_inverter/device.py": "f775cf217f61cf40ab0425caa02a866b2554a4d7a81c4dc92f8a7d35fb7adf6c",
     "sungrow_shx_inverter/energy.py": "dcfeb48c07596d9b54fd281a846cca04cda408f60e7b3f9e2d4169049f1d1a3e",
     "sungrow_shx_inverter/enums.py": "3a09f87b772e9e61cbdfc9f0a4725c0dc01f3b521450273dba593d6f8de00df1",
     "sungrow_shx_inverter/export_bounds.py": "9077f0587a5db07c9347c1348962e05904b732ad7644c5cc416c47f3a4e4c6af",
@@ -41,6 +40,6 @@
     "sungrow_shx_inverter/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "sungrow_shx_inverter/software.py": "6e5641eef972495d9c480d98f7faf3362fd526dfc1220b7abe731e8a29660523",
     "sungrow_shx_inverter/state.py": "5bb58126e8596a48384aec8ad3460bb0d00b84b0cbca8fabd5a3c98dbf572db2",
-    "sungrow_shx_inverter/variants.py": "26f03d929a70de888c181a444f21521c0ba567927ce32a6b52cf1619310ece57"
+    "sungrow_shx_inverter/variants.py": "46c002afdbb169d60529cdcf7025207b0ef7ac203f3bd618e8adb2c6abd687c1"
   }
 }

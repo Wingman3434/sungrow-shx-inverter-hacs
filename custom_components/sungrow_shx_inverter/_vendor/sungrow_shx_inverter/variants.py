@@ -15,7 +15,6 @@ class Model:
     phases: int
     mppts: int
     extended_firmware: bool
-    start_thresholds: bool
     active_limitation: bool
 
 
@@ -80,6 +79,5 @@ def identify(code: int | None) -> Model:
         if name.endswith("T") and "RT" not in name
         else 2,
         extended_firmware=not (rs or mg),
-        start_thresholds=not rs,
         active_limitation=not mg,
     )

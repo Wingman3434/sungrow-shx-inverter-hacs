@@ -95,8 +95,8 @@ and include:
 
 ## What is included
 
-- Full six-platform implementation: 114 sensor descriptions, seven binary flags,
-  nine numbers, three switches, three register-backed selects, a composed
+- Full six-platform implementation: 112 sensor descriptions, seven binary flags,
+  seven numbers, three switches, three register-backed selects, a composed
   **Operating preset** selector and two opt-in command buttons.
 - Register blocks your inverter does not implement are detected and skipped, so an
   unsupported group is never created as permanently unavailable entities.

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.9 — community testing build
+
+- **Removed the two battery threshold settings** ("Battery charging start power" and
+  "Battery discharging start power"). They read holding registers 33148/33149, which do not
+  exist in the Sungrow protocol document — its only register in that range is
+  "Charging/Discharging Power – Wide range" at document address 33148, one address below —
+  and the inverter answers those addresses with a device-failure exception, so they could
+  never report a value. Each existed twice: a read-only diagnostic sensor (disabled by
+  default) and a writable number.
+  - Upgrading: the two number entities were enabled, so they linger as unavailable rows until
+    removed. Clear them with Home Assistant's orphaned-entity cleanup — Settings → Devices &
+    Services → Entities, filter for the unavailable/restored rows and remove them.
+- No other functional changes.
+
 ## 0.0.8 — community testing build
 
 - **The two combined-energy sensors now ship disabled by default.** "Daily PV generation &

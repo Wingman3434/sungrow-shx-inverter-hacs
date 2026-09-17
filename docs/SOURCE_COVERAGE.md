@@ -13,12 +13,12 @@ Source: source/modbus_sungrow.yaml (90066 bytes), SHA-256 4c1580bb02cd2e6213ea5f
 
 | Source item | Count | Destination |
 | --- | ---: | --- |
-| Active Modbus sensors | 93 of 99 | Typed library fields and core sensor descriptions; the six meter phase V×I registers (5740–5745) are deliberately not exposed |
+| Active Modbus sensors | 91 of 99 | Typed library fields and core sensor descriptions; the six meter phase V×I registers (5740–5745) and the two battery threshold registers (33148/33149) are deliberately not exposed |
 | Direct Modbus switches | 3 | Switch entities, 0xAA/0x55 write/readback |
 | Arithmetic/status template sensors | 21 | Library derived properties and core sensors |
 | Immediate power-flow binary sensors | 7 | Library derived properties and core binary sensors |
 | Delayed binary sensors | 7 | Optional generated helper package, 60-second delay_on |
-| Template numbers | 9 | Number entities with inverse scaling and validation |
+| Template numbers | 7 | Number entities with inverse scaling and validation |
 | Template selects | 3 | Select entities with exact vendor words |
 | Start/stop buttons | 2 | Buttons, disabled by default, holding register 12999 |
 | Dashboard danger-mode switch | 1 | Optional input_boolean plus automatic reset |
@@ -31,6 +31,7 @@ Source: source/modbus_sungrow.yaml (90066 bytes), SHA-256 4c1580bb02cd2e6213ea5f
 - Reactive power: var/reactive_power, not W/power.
 - Phase V×I: VA/apparent_power, not measured active power. The calculations remain unchanged.
 - Meter phase V×I (input 5740–5745): not shipped. The maintainer's inverter refuses that block while every neighbouring meter register answers, and the source map credits it to a forum post rather than the protocol document. Per-phase meter power (5600/5602/5604/5606) is unaffected.
+- Battery charging/discharging start power (holding 33148/33149): not shipped. Those addresses do not exist in the protocol document — its only entry in that range is "Charging/Discharging Power – Wide range" at *document* register 33148 (zero-based 33147) — and the maintainer's inverter answers them with a device-failure exception, so the readings could never be produced.
 - A register block the device itself refuses (illegal data address) is treated as absent rather than failing: it is dropped from polling and its entities are never created, so a model whose register map differs from the source needs no special case.
 - Maximum charge/discharge power: 10 W step, so the source's 10 W minimum and 0.01 kW resolution are representable (source UI step 100 was inconsistent).
 - Unknown selects remain unknown; no silent fallback to self-consumption or stop.
@@ -147,8 +148,6 @@ input addresses 4989–4998, all host settings and exception text.
 | sg_apl_shutdown_on_zero_raw | apl.apl_shutdown_at_zero_raw | apl_shutdown_at_zero_raw |
 | sg_battery_max_charge_power | battery_limits.battery_max_charge_power | battery_max_charge_power |
 | sg_battery_max_discharge_power | battery_limits.battery_max_discharge_power | battery_max_discharge_power |
-| sg_battery_charging_start_power | battery_thresholds.battery_charging_start_power | battery_charging_start_power |
-| sg_battery_discharging_start_power | battery_thresholds.battery_discharging_start_power | battery_discharging_start_power |
 
 New unique IDs use serial_key within each entity platform. Entity IDs are
 assigned by the entity registry; do not assume that a display name is its ID.
