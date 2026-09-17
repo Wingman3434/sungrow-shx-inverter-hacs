@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.3 — community testing build
+
+- **Fixed the battery power ceiling.** `battery_max_power` — the cap applied to *Battery forced
+  charge discharge power*, *Battery max charge power* and *Battery max discharge power* — now also
+  considers the inverter's rated output (register 5000), not just the configured option and the
+  battery's BDC rating. The device bounds registers 33046/33047 by its rated output, so a maximum
+  preset could previously resolve to a value the inverter refused: the confirmed write failed, the
+  preset retried with a lower fallback and logged a line. The first write now lands correctly.
+- The preset fallback remains as a safety net for a device that refuses a value for its own reason.
+- No other functional changes.
+
 ## 0.1.2 — community testing build
 
 - **Devices can now be removed from Home Assistant.** The integration implements

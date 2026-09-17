@@ -92,11 +92,11 @@ PRESET_KEYS = tuple(PRESETS)
 def fallback_maximum(
     device: SungrowSHxInverter, step: PresetStep
 ) -> int | float | None:
-    """A lower, device-derived ceiling to retry when the rated maximum is refused.
+    """A lower, device-derived ceiling to retry when a maximum is still refused.
 
-    Registers 33046/33047 are also bounded by the inverter's rated output, which
-    ``battery_max_power`` does not consider, so the reported BDC rating and the
-    configured cap can both exceed what the device actually accepts.
+    ``battery_max_power`` now considers the inverter's rated output as well as the BDC
+    rating, so the first write should already be accepted; this remains the safety net for
+    a device that refuses the value for a reason of its own.
     """
     if step.field == "battery_max_discharge_power":
         return device.identity.inverter_rated_output

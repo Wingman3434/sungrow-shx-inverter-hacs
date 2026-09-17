@@ -170,11 +170,14 @@ class SungrowSHxInverter:
 
     @property
     def battery_max_power(self) -> float | None:
-        """Configured battery limit, capped by the inverter's BDC rating."""
-        rating = self.battery_info.bdc_rated_power
+        """Configured battery limit, capped by the battery and inverter ratings."""
         values = [
             float(v)
-            for v in (self._battery_max_power, rating)
+            for v in (
+                self._battery_max_power,
+                self.battery_info.bdc_rated_power,
+                self.identity.inverter_rated_output,
+            )
             if v is not None and 0 < v < 655350
         ]
         return min(values) if values else None
