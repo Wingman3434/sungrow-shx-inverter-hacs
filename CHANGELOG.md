@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.0.7 — community testing build
+
+- **Brand art is icon-only.** The large "SUNGROW" wordmark tile and its dark variant are
+  gone; the square emblem icon now represents the integration everywhere. This is the
+  arrangement the brands repository recommends when a brand uses one image for both its
+  icon and its logo — the icon is served as the logo fallback.
+- **README header image no longer disappears.** It used a repository-relative path, which
+  renders on GitHub but breaks everywhere the README is rendered from fetched Markdown
+  (including HACS); it now uses an absolute URL.
+- **README badge row** added: HACS custom repository, latest release, license, commit
+  activity, last commit and open issues.
+- No functional change — entities, controls and diagnostics behave exactly as in 0.0.6.
+
 ## 0.0.6 — community testing build
 
 - **Diagnostics are usable again on this inverter.** The raw register dump

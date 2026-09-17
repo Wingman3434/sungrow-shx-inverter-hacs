@@ -1,5 +1,14 @@
 <p align="center">
-  <img src="custom_components/sungrow_shx_inverter/brand/logo.png" alt="Sungrow SHx Inverter" width="180">
+  <img src="https://raw.githubusercontent.com/Wingman3434/sungrow-shx-inverter-hacs/main/custom_components/sungrow_shx_inverter/brand/icon.png" alt="Sungrow SHx Inverter" width="128">
+</p>
+
+<p align="center">
+  <a href="https://github.com/hacs/integration"><img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge" alt="HACS custom repository"></a>
+  <a href="https://github.com/Wingman3434/sungrow-shx-inverter-hacs/releases"><img src="https://img.shields.io/github/v/release/Wingman3434/sungrow-shx-inverter-hacs?style=for-the-badge" alt="Latest release"></a>
+  <a href="https://github.com/Wingman3434/sungrow-shx-inverter-hacs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Wingman3434/sungrow-shx-inverter-hacs?style=for-the-badge" alt="License"></a>
+  <a href="https://github.com/Wingman3434/sungrow-shx-inverter-hacs/graphs/commit-activity"><img src="https://img.shields.io/github/commit-activity/y/Wingman3434/sungrow-shx-inverter-hacs?style=for-the-badge" alt="Commit activity"></a>
+  <a href="https://github.com/Wingman3434/sungrow-shx-inverter-hacs/commits/main"><img src="https://img.shields.io/github/last-commit/Wingman3434/sungrow-shx-inverter-hacs?style=for-the-badge" alt="Last commit"></a>
+  <a href="https://github.com/Wingman3434/sungrow-shx-inverter-hacs/issues"><img src="https://img.shields.io/github/issues/Wingman3434/sungrow-shx-inverter-hacs?style=for-the-badge" alt="Open issues"></a>
 </p>
 
 # Sungrow SHx Inverter
