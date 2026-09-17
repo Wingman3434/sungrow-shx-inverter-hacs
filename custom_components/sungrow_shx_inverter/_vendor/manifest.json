@@ -21,7 +21,7 @@
     "sungrow_shx_inverter/combined_energy.py": "d54213694482d9bc438306350540b94005af22eae831a4912d4a2d561f7f9a7b",
     "sungrow_shx_inverter/communication_firmware.py": "a9190eb1de30c402d5cbcb6f21ea4f23c638c35150228e02ec16c8b3036baff8",
     "sungrow_shx_inverter/derived.py": "00ad72410675626b3463234905c1b00c2cbc1e41c941fe1d7f27734fcca3756d",
-    "sungrow_shx_inverter/device.py": "5ff3a8da89af872e39c21692d530535693833c4bd8a0901ed9f1c6ae8b7c8bea",
+    "sungrow_shx_inverter/device.py": "9b626f3fab7fc879acc0fd71d7666299045d49b0598402be6f3526da34dc5b52",
     "sungrow_shx_inverter/energy.py": "dcfeb48c07596d9b54fd281a846cca04cda408f60e7b3f9e2d4169049f1d1a3e",
     "sungrow_shx_inverter/enums.py": "3a09f87b772e9e61cbdfc9f0a4725c0dc01f3b521450273dba593d6f8de00df1",
     "sungrow_shx_inverter/export_bounds.py": "9077f0587a5db07c9347c1348962e05904b732ad7644c5cc416c47f3a4e4c6af",

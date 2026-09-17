@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.4 — vendor snapshot sync
+
+- **No functional change to the integration.** The vendored `sungrow_shx_inverter` snapshot was
+  regenerated from the library source, whose `device.py` had been reformatted with the project's
+  pinned Ruff 0.16.6. The boolean expression it contains is textually different but semantically
+  identical (verified by AST comparison), and `_vendor/manifest.json` was rehashed.
+- The release also carries the library-side maintenance done in the same pass: the library's
+  routine gate now runs Ruff and strict mypy rather than pytest alone, and a strict-mypy error
+  plus a `--raw` crash in the library's own `query.py` helper, an over-long docstring and
+  unformatted source were fixed. None of that helper or test code ships inside `_vendor`.
+- Entities, registers, translations and behaviour are unchanged from 0.1.3.
+
 ## 0.1.3 — community testing build
 
 - **Fixed the battery power ceiling.** `battery_max_power` — the cap applied to *Battery forced

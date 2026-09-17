@@ -209,15 +209,12 @@ class SungrowSHxInverter:
                     and not (k.startswith("mppt4") and profile.mppts < 4)
                 }
                 if (
-                    (
-                        component_name.endswith("_firmware")
-                        and component_name != "legacy_firmware"
-                        and not profile.extended_firmware
-                    )
-                    or (
-                        component_name == "active_limitation"
-                        and not profile.active_limitation
-                    )
+                    component_name.endswith("_firmware")
+                    and component_name != "legacy_firmware"
+                    and not profile.extended_firmware
+                ) or (
+                    component_name == "active_limitation"
+                    and not profile.active_limitation
                 ):
                     keep = set()
                 component.restrict_fields(keep)
