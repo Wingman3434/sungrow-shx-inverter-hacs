@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.1 — community testing build
+
+- **Reverted the sub-device split introduced in 0.1.0.** Every entity reports on the single
+  `Sungrow SHx Inverter <MODEL>` device again, exactly as before 0.1.0.
+- **The 0.1.0 corrections are kept:** measurements stay uncategorised, settings are
+  Configuration, and version/capability/raw-register data is Diagnostic; names use sentence case
+  throughout, register read-backs keep their "(read-back)" suffix, and the two colliding toggles
+  remain "Export limitation" and "Load adjustment".
+  - Upgrading from 0.1.0: the five sub-devices (`<MODEL> PV`, `Battery`, `Meter`, `Energy`,
+    `Backup`) are left behind as empty devices — open each one in Settings → Devices and
+    delete it. Entity IDs are unchanged either way.
+- No functional change to the readings themselves.
+
 ## 0.1.0 — first structured release
 
 - **Entities are grouped by subsystem.** The integration now reports across six Home Assistant

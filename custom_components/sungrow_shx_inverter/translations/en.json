@@ -151,22 +151,22 @@
         "name": "MPPT4 current"
       },
       "battery_power": {
-        "name": "Power"
+        "name": "Battery power"
       },
       "grid_frequency": {
         "name": "Grid frequency"
       },
       "meter_active_power": {
-        "name": "Active power"
+        "name": "Meter active power"
       },
       "meter_phase_a_active_power": {
-        "name": "Phase A power"
+        "name": "Meter phase A active power"
       },
       "meter_phase_b_active_power": {
-        "name": "Phase B power"
+        "name": "Meter phase B active power"
       },
       "meter_phase_c_active_power": {
-        "name": "Phase C power"
+        "name": "Meter phase C active power"
       },
       "export_power_limit_min": {
         "name": "Export power limit min"
@@ -178,7 +178,7 @@
         "name": "BDC rated power"
       },
       "battery_current": {
-        "name": "Current"
+        "name": "Battery current"
       },
       "bms_max_charging_current": {
         "name": "BMS max charging current"
@@ -187,19 +187,19 @@
         "name": "BMS max discharging current"
       },
       "battery_capacity_high_precision": {
-        "name": "Capacity"
+        "name": "Battery capacity high precision"
       },
       "backup_phase_a_power": {
-        "name": "Phase A power"
+        "name": "Backup phase A power"
       },
       "backup_phase_b_power": {
-        "name": "Phase B power"
+        "name": "Backup phase B power"
       },
       "backup_phase_c_power": {
-        "name": "Phase C power"
+        "name": "Backup phase C power"
       },
       "total_backup_power": {
-        "name": "Total power"
+        "name": "Total backup power"
       },
       "running_state_raw": {
         "name": "Running state raw"
@@ -238,16 +238,16 @@
         "name": "Total direct energy consumption"
       },
       "battery_voltage": {
-        "name": "Voltage"
+        "name": "Battery voltage"
       },
       "battery_level": {
-        "name": "Level"
+        "name": "Battery level"
       },
       "battery_state_of_health": {
-        "name": "State of health"
+        "name": "Battery state of health"
       },
       "battery_temperature": {
-        "name": "Temperature"
+        "name": "Battery temperature"
       },
       "daily_battery_discharge": {
         "name": "Daily battery discharge"
@@ -370,16 +370,16 @@
         "name": "Device type"
       },
       "battery_charging_power_signed": {
-        "name": "Charging power (signed)"
+        "name": "Battery charging power (signed)"
       },
       "battery_charging_power": {
-        "name": "Charging power"
+        "name": "Battery charging power"
       },
       "battery_discharging_power_signed": {
-        "name": "Discharging power (signed)"
+        "name": "Battery discharging power (signed)"
       },
       "battery_discharging_power": {
-        "name": "Discharging power"
+        "name": "Battery discharging power"
       },
       "import_power": {
         "name": "Import power"
@@ -388,16 +388,16 @@
         "name": "Export power"
       },
       "battery_level_nominal": {
-        "name": "Level (nominal)"
+        "name": "Battery level (nominal)"
       },
       "battery_charge_nominal": {
-        "name": "Energy stored (nominal)"
+        "name": "Battery charge (nominal)"
       },
       "battery_charge": {
-        "name": "Energy stored"
+        "name": "Battery charge"
       },
       "battery_charge_health_rated": {
-        "name": "Energy stored (health-rated)"
+        "name": "Battery charge (health-rated)"
       },
       "daily_consumed_energy": {
         "name": "Daily consumed energy"

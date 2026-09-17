@@ -50,42 +50,32 @@ async def test_setup_and_unload(
     assert init_integration.state is ConfigEntryState.NOT_LOADED
 
 
-async def test_entities_are_grouped_by_sub_device(
+async def test_entities_share_the_inverter_device(
     hass: HomeAssistant,
     init_integration: MockConfigEntry,
     entity_registry: er.EntityRegistry,
     device_registry: dr.DeviceRegistry,
 ) -> None:
-    """Each subsystem reports on its own device page, linked to the inverter."""
-    parent_name = "Sungrow SHx Inverter SH10RT"
+    """Every entity reports on the one inverter device."""
     devices = dr.async_entries_for_config_entry(
         device_registry, init_integration.entry_id
     )
-    by_name = {device.name: device for device in devices}
-    assert parent_name in by_name
-    for suffix in ("PV", "Battery", "Meter", "Energy", "Backup"):
-        assert f"SH10RT {suffix}" in by_name
-    parent = by_name[parent_name]
-    for name, device in by_name.items():
-        if name != parent_name:
-            assert device.via_device_id == parent.id
-    expected = {
-        "mppt1_voltage": "SH10RT PV",
-        "battery_power": "SH10RT Battery",
-        "meter_active_power": "SH10RT Meter",
-        "daily_pv_generation": "SH10RT Energy",
-        "backup_phase_a_power": "SH10RT Backup",
-        "phase_a_voltage": parent_name,
-    }
-    for key, group in expected.items():
+    assert len(devices) == 1
+    device = devices[0]
+    assert device.name == "Sungrow SHx Inverter SH10RT"
+    for platform, key in (
+        ("sensor", "mppt1_voltage"),
+        ("sensor", "battery_power"),
+        ("sensor", "meter_active_power"),
+        ("sensor", "daily_pv_generation"),
+        ("sensor", "backup_phase_a_power"),
+        ("sensor", "phase_a_voltage"),
+        ("select", "operating_preset"),
+    ):
         registry_entry = entity_registry.async_get(
-            entity_id(entity_registry, "sensor", key)
+            entity_id(entity_registry, platform, key)
         )
-        assert device_registry.async_get(registry_entry.device_id).name == group, key
-    preset = entity_registry.async_get(
-        entity_id(entity_registry, "select", "operating_preset")
-    )
-    assert device_registry.async_get(preset.device_id).id == parent.id
+        assert registry_entry.device_id == device.id, key
 
 
 async def test_setup_unreachable(
