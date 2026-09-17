@@ -10,6 +10,7 @@ from modbus_connection.mock import MockModbusConnection
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
+from custom_components.sungrow_shx_inverter import async_remove_config_entry_device
 from custom_components.sungrow_shx_inverter._vendor.sungrow_shx_inverter import (
     SungrowSHxInverter,
     UpdateReport,
@@ -76,6 +77,24 @@ async def test_entities_share_the_inverter_device(
             entity_id(entity_registry, platform, key)
         )
         assert registry_entry.device_id == device.id, key
+
+
+async def test_remove_config_entry_device_allows_stale_devices(
+    hass: HomeAssistant,
+    init_integration: MockConfigEntry,
+    device_registry: dr.DeviceRegistry,
+) -> None:
+    """Stale devices may be removed; the inverter device may not."""
+    stale = device_registry.async_get_or_create(
+        config_entry_id=init_integration.entry_id,
+        identifiers={(DOMAIN, f"{SERIAL}_pv")},
+    )
+    live = device_registry.async_get_device_by_identifier(
+        (DOMAIN, SERIAL), init_integration.entry_id
+    )
+    assert live is not None
+    assert await async_remove_config_entry_device(hass, init_integration, stale)
+    assert not await async_remove_config_entry_device(hass, init_integration, live)
 
 
 async def test_setup_unreachable(

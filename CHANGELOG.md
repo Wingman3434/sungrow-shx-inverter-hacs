@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.2 — community testing build
+
+- **Devices can now be removed from Home Assistant.** The integration implements
+  `async_remove_config_entry_device`, so a device page offers *Remove device from Sungrow SHx
+  Inverter* for anything this entry no longer provides — and the Devices-list bulk delete
+  accepts them too. Before this, Home Assistant could only offer *Disable*.
+  - Use it to clear the five sub-devices left behind by 0.1.0: PV, Battery, Meter, Energy and
+    Backup.
+  - The inverter device itself is excluded — remove the config entry if you want that gone;
+    Home Assistant recreates the device on the next setup.
+- No functional change to the readings themselves.
+
 ## 0.1.1 — community testing build
 
 - **Reverted the sub-device split introduced in 0.1.0.** Every entity reports on the single
