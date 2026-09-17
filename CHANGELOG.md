@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.0.8 — community testing build
+
+- **The two combined-energy sensors now ship disabled by default.** "Daily PV generation &
+  battery discharge" and "Total PV generation & battery discharge" read registers this
+  inverter does not populate as the register map describes: the total returns the grid-export
+  counter word for word, and the daily figure cannot be a PV + battery discharge total. They
+  remain available — enable them deliberately if you want them.
+  - Upgrading: a disabled-by-default flag only applies to entities created after the change,
+    so disable or delete the two sensors by hand if you already have them enabled.
+- No other functional changes.
+
 ## 0.0.7 — community testing build
 
 - **Brand art is icon-only.** The large "SUNGROW" wordmark tile and its dark variant are

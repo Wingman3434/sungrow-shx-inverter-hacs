@@ -11,6 +11,7 @@ from modbus_connection import (
     ServerDeviceFailureError,
 )
 from modbus_connection.mock import MockModbusConnection
+import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from . import DOMAIN, SERIAL
@@ -125,3 +126,24 @@ async def test_pruned_subsystem_keeps_the_rest_polling(
         ).state
         == STATE_UNAVAILABLE
     )
+
+
+@pytest.mark.parametrize(
+    "key",
+    [
+        "daily_pv_generation_battery_discharge",
+        "total_pv_generation_battery_discharge",
+    ],
+)
+async def test_combined_energy_is_disabled_by_default(
+    init_integration: MockConfigEntry,
+    entity_registry: er.EntityRegistry,
+    key: str,
+) -> None:
+    """The combined-energy registers are not reliable on every model."""
+    assert init_integration.runtime_data is not None
+    registry_id = entity_registry.async_get_entity_id(
+        "sensor", DOMAIN, f"{SERIAL}_{key}"
+    )
+    assert registry_id is not None
+    assert entity_registry.async_get(registry_id).disabled_by is not None

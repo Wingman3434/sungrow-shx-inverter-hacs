@@ -138,6 +138,7 @@ SENSORS: tuple[SungrowSensorDescription, ...] = (
         native_unit_of_measurement="kWh",
         state_class=SensorStateClass.TOTAL_INCREASING,
         suggested_display_precision=1,
+        entity_registry_enabled_default=False,
     ),
     SungrowSensorDescription(
         key="total_pv_generation_battery_discharge",
@@ -150,6 +151,7 @@ SENSORS: tuple[SungrowSensorDescription, ...] = (
         native_unit_of_measurement="kWh",
         state_class=SensorStateClass.TOTAL,
         suggested_display_precision=1,
+        entity_registry_enabled_default=False,
     ),
     SungrowSensorDescription(
         key="inverter_temperature",
