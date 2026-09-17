@@ -18,6 +18,7 @@ from ._vendor.sungrow_shx_inverter import (
     UpdateReport,
 )
 from .const import DOMAIN, SCAN_INTERVAL
+from .devices import PARENT_DEVICE, SUB_DEVICE_LABELS, identifier
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -48,12 +49,26 @@ class SungrowCoordinator(DataUpdateCoordinator[UpdateReport]):
         serial = self.device.serial_number
         assert serial is not None
         return DeviceInfo(
-            identifiers={(DOMAIN, serial)},
+            identifiers=identifier(PARENT_DEVICE, serial),
             manufacturer="Sungrow",
             model=self.device.model,
             name=f"Sungrow SHx Inverter {self.device.model}",
             serial_number=serial,
             sw_version=self.device.inverter_firmware.inverter_firmware_version or None,
+        )
+
+    def device_info_for(self, group: str) -> DeviceInfo:
+        """Describe the group's device: the inverter itself or a sub-assembly."""
+        if group == PARENT_DEVICE:
+            return self.device_info
+        serial = self.device.serial_number
+        assert serial is not None
+        return DeviceInfo(
+            identifiers=identifier(group, serial),
+            manufacturer="Sungrow",
+            model=self.device.model,
+            name=f"{self.device.model} {SUB_DEVICE_LABELS[group]}",
+            via_device=(DOMAIN, serial),
         )
 
     @override

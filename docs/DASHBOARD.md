@@ -9,27 +9,34 @@ signs, caching and controls. Read those first if you have not.
 Nothing here has been run on a physical inverter. The entity IDs below are
 **derived from the source code**, not confirmed against a live installation.
 
-## Entity IDs are model-specific
+## Entity IDs are model- and device-specific
 
-This integration names each entity as `"<device name> <entity name>"`:
+This integration names each entity as `"<device name> <entity name>"`, and splits
+its entities across several Home Assistant devices:
 
 - `entity.py` sets `_attr_has_entity_name = True`, so Home Assistant builds the
   entity ID from the device name plus the translated entity name.
-- `coordinator.py` sets
-  `DeviceInfo(name=f"Sungrow SHx Inverter {self.device.model}")`, and
-  `device.model` returns the detected profile name (for example `SH20T`, device
-  code `3622` in `_vendor/sungrow_shx_inverter/variants.py`).
+- The inverter itself is `Sungrow SHx Inverter <MODEL>` (for example
+  `Sungrow SHx Inverter SH20T`) and keeps the controls, status flags, system
+  information, diagnostics, grid and output readings.
+- Five sub-devices hold the rest, so those lists stay short: `<MODEL> PV`,
+  `<MODEL> Battery`, `<MODEL> Meter`, `<MODEL> Energy` and `<MODEL> Backup`.
 
-So the entity ID is the slug of `"Sungrow SHx Inverter <MODEL> <ENTITY NAME>"`.
-For an SH20T the device-name slug is `sungrow_shx_inverter_sh20t`, giving:
+For an SH20T that yields one parent prefix and five sub-device prefixes:
 
 ```
-sensor.sungrow_shx_inverter_sh20t_total_pv_generation
+sensor.sungrow_shx_inverter_sh20t_phase_a_voltage   # inverter (grid)
+sensor.sh20t_pv_mppt1_voltage                       # PV
+sensor.sh20t_battery_power                          # Battery
+sensor.sh20t_meter_active_power                     # Meter
+sensor.sh20t_energy_total_pv_generation             # Energy
+sensor.sh20t_backup_phase_a_power                   # Backup
 ```
 
-Every entity on that device shares the same prefix; only the trailing entity
-name changes. **Different models produce different IDs** — an SH10RT yields
-`sungrow_shx_inverter_sh10rt_...`, and so on.
+**Different models produce different IDs** — an SH10RT yields
+`sungrow_shx_inverter_sh10rt_...` and `sh10rt_...`, and so on. Entities created
+before 0.1.0 keep the IDs they already have; only installations created after it
+see the shorter sub-device prefixes.
 
 ### Confirm your own IDs
 
@@ -51,34 +58,34 @@ from and the SH20T ID here.
 
 | Energy Dashboard field | New entity (name) | Upstream entity | SH20T example entity ID |
 | --- | --- | --- | --- |
-| Grid consumption | Total imported energy | Total imported energy | `sensor.sungrow_shx_inverter_sh20t_total_imported_energy` |
-| Return to grid | Total exported energy | Total exported energy | `sensor.sungrow_shx_inverter_sh20t_total_exported_energy` |
-| Grid power | Meter active power | Meter active power | `sensor.sungrow_shx_inverter_sh20t_meter_active_power` |
-| Solar production → energy | Total PV generation | Total PV generation | `sensor.sungrow_shx_inverter_sh20t_total_pv_generation` |
-| Solar production → power | Total DC power | Total DC power | `sensor.sungrow_shx_inverter_sh20t_total_dc_power` |
-| Battery → energy charged | Total battery charge | Total battery charge | `sensor.sungrow_shx_inverter_sh20t_total_battery_charge` |
-| Battery → energy discharged | Total battery discharge | Total battery discharge | `sensor.sungrow_shx_inverter_sh20t_total_battery_discharge` |
-| Battery → power | Battery power | Battery discharging power signed | `sensor.sungrow_shx_inverter_sh20t_battery_power` |
+| Grid consumption | Total imported energy | Total imported energy | `sensor.sh20t_energy_total_imported_energy` |
+| Return to grid | Total exported energy | Total exported energy | `sensor.sh20t_energy_total_exported_energy` |
+| Grid power | Active power (Meter device) | Meter active power | `sensor.sh20t_meter_active_power` |
+| Solar production → energy | Total PV generation | Total PV generation | `sensor.sh20t_energy_total_pv_generation` |
+| Solar production → power | Total DC power | Total DC power | `sensor.sh20t_pv_total_dc_power` |
+| Battery → energy charged | Total battery charge | Total battery charge | `sensor.sh20t_energy_total_battery_charge` |
+| Battery → energy discharged | Total battery discharge | Total battery discharge | `sensor.sh20t_energy_total_battery_discharge` |
+| Battery → power | Power (Battery device) | Battery discharging power signed | `sensor.sh20t_battery_power` |
 
 Caveats carried from USER_GUIDE.md, repeated here because they change the
 Energy Dashboard result:
 
-- **Meter active power** is positive on import and negative on export; the raw
-  grid-export register uses the opposite sign. Do not substitute one for the
+- The meter's **Active power** is positive on import and negative on export; the
+  raw grid-export register uses the opposite sign. Do not substitute one for the
   other.
 - Do **not** select the combined **Total PV generation & battery discharge**
   (`..._total_pv_generation_battery_discharge`) as solar production, and do not
   also add the PV and battery totals for the same flow.
-- **Phase A/B/C apparent power** (`..._phase_a_power`) is a VA magnitude, not
+- **Phase A/B/C apparent power** (`sensor.sungrow_shx_inverter_sh20t_phase_a_power`)
+  is a VA magnitude, not
   measured active power; reactive power is in var. Keep them off the Energy
   Dashboard power fields.
-- **Battery power** and **Battery discharging power signed** are the *same
+- The battery's **Power** and **Discharging power (signed)** are the *same
   reading with the same sign* — both derive from holding register `5213`, positive
   while discharging and negative while charging (`derived.py` returns the raw
   value for the discharging sensor and its negation for the charging one). Pick
-  either, but never add both. This document uses `Battery power` to match
-  USER_GUIDE.md; the upstream package selected the equivalent
-  `Battery discharging power signed`.
+  either, but never add both. This document uses **Power** on the Battery device;
+  USER_GUIDE.md and the upstream package describe the same value.
 
 ## 2. Custom Lovelace dashboard (optional)
 
@@ -88,23 +95,24 @@ the upstream entity IDs and scenes do not match it. If you want that layout
 back, rebuild it against the entity **names** below.
 
 **Untested starter only.** The YAML at the end of this section is a minimal
-sketch, not a guaranteed-working dashboard. It assumes the SH20T device-name
-prefix `sungrow_shx_inverter_sh20t`; replace it with your own prefix and verify
+sketch, not a guaranteed-working dashboard. It assumes the SH20T device names — `Sungrow SHx Inverter SH20T` plus the
+`SH20T PV`, `SH20T Battery`, `SH20T Meter`, `SH20T Energy` and `SH20T Backup`
+sub-devices; replace them with your own model's names and verify
 each entity ID first. Treat it as a starting point to edit in the raw
 configuration editor, not something to paste blindly.
 
 Suggested contents by tab:
 
 - **Overview** — live flows and today's energy:
-  `Total DC power`, `Load power`, `Meter active power`, `Battery power`,
-  `Battery level`, `Daily PV generation`.
+  `Total DC power` (PV), `Load power` (inverter), `Active power` (meter),
+  `Power` (battery), `Level` (battery), `Daily PV generation` (energy).
 - **Details** — per-string and electrical detail:
   `MPPT1..4 voltage` / `MPPT1..4 current`, `Phase A/B/C voltage`,
   `Phase A/B/C current`, `Inverter temperature`, `Running state raw`,
   `Inverter Firmware Version`.
 - **EMS control** — the built-in controls (no helpers needed):
   the **Operating preset** selector, `EMS mode`,
-  `Battery forced charge discharge`, `Battery Min Soc`, `Battery Max Soc`,
+  `Battery forced charge discharge`, `Battery min SoC`, `Battery max SoC`,
   `Export power limit`.
 
 The **Operating preset** selector replaces the upstream preset scenes; see
@@ -114,8 +122,8 @@ now redundant.
 Minimal starter (untested — verify and edit):
 
 ```yaml
-# Starter Lovelace tab. Replace the sungrow_shx_inverter_sh20t_* prefix with
-# your device's prefix and confirm every entity ID before use.
+# Starter Lovelace tab. Replace the sungrow_shx_inverter_sh20t_* and sh20t_*
+# prefixes with your own model's, and confirm every entity ID before use.
 title: Sungrow
 views:
   - title: Overview
@@ -123,22 +131,22 @@ views:
       - type: entities
         title: Live power (W)
         entities:
-          - sensor.sungrow_shx_inverter_sh20t_total_dc_power
+          - sensor.sh20t_pv_total_dc_power
           - sensor.sungrow_shx_inverter_sh20t_load_power
-          - sensor.sungrow_shx_inverter_sh20t_meter_active_power
-          - sensor.sungrow_shx_inverter_sh20t_battery_power
-          - sensor.sungrow_shx_inverter_sh20t_battery_level
+          - sensor.sh20t_meter_active_power
+          - sensor.sh20t_battery_power
+          - sensor.sh20t_battery_level
       - type: entities
         title: Today (kWh)
         entities:
-          - sensor.sungrow_shx_inverter_sh20t_daily_pv_generation
+          - sensor.sh20t_energy_daily_pv_generation
   - title: Details
     cards:
       - type: entities
         title: Strings
         entities:
-          - sensor.sungrow_shx_inverter_sh20t_mppt1_voltage
-          - sensor.sungrow_shx_inverter_sh20t_mppt1_current
+          - sensor.sh20t_pv_mppt1_voltage
+          - sensor.sh20t_pv_mppt1_current
           - sensor.sungrow_shx_inverter_sh20t_inverter_temperature
           - sensor.sungrow_shx_inverter_sh20t_running_state_raw
   - title: EMS control

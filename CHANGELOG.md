@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.1.0 — first structured release
+
+- **Entities are grouped by subsystem.** The integration now reports across six Home Assistant
+devices instead of one: the inverter itself (controls, status, system information, diagnostics,
+  grid and output) plus five sub-devices — **PV**, **Battery**, **Meter**, **Energy** and
+  **Backup** — each linked to the inverter. Device pages now list a short, logical set instead of
+  one long list.
+- **Entity names are data-point-only**, per the Home Assistant naming rules: on the Battery
+  device the entity is simply "Power", so it reads as "SH20T Battery Power". Sentence case is
+  applied throughout, and the duplicate names are gone — register read-backs are suffixed
+  "(read-back)", the export toggle is "Export limitation", and the load-adjustment toggle is
+  "Load adjustment".
+- **Categories follow the Home Assistant review guide**: measurements stay uncategorised,
+  settings and controls are `CONFIG`, and capability/version/raw-register data is `DIAGNOSTIC`
+  (rated output, BDC rated power, BMS current limits and the export-power bounds moved there;
+  the derived device type is diagnostics and disabled by default).
+- **Upgrading:** entity IDs you already have are unchanged, but friendly names change. Entities
+  created after this release use the sub-device prefixes (`sensor.sh20t_battery_power`).
+- No functional change to the readings themselves.
+
 ## 0.0.9 — community testing build
 
 - **Removed the two battery threshold settings** ("Battery charging start power" and

@@ -10,6 +10,7 @@ from modbus_connection import ModbusError
 
 from .const import DOMAIN
 from .coordinator import SungrowCoordinator
+from .devices import PARENT_DEVICE
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -20,6 +21,7 @@ class SungrowDescription(EntityDescription):
     field: str
     dependencies: tuple[str, ...]
     source_fields: tuple[tuple[str, str], ...]
+    device: str = PARENT_DEVICE
 
 
 def is_supported(
@@ -46,7 +48,7 @@ class SungrowEntity(CoordinatorEntity[SungrowCoordinator]):
         super().__init__(coordinator)
         self.entity_description = description
         self._attr_unique_id = f"{coordinator.device.serial_number}_{description.key}"
-        self._attr_device_info = coordinator.device_info
+        self._attr_device_info = coordinator.device_info_for(description.device)
 
     @property
     @override

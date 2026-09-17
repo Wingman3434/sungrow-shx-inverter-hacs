@@ -2,7 +2,7 @@
 
 from unittest.mock import patch
 
-from homeassistant.const import STATE_UNAVAILABLE
+from homeassistant.const import STATE_UNAVAILABLE, EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 from modbus_connection import (
@@ -13,6 +13,8 @@ from modbus_connection import (
 from modbus_connection.mock import MockModbusConnection
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
+
+from custom_components.sungrow_shx_inverter.sensor import SENSORS
 
 from . import DOMAIN, SERIAL
 from .common import entity_id
@@ -147,3 +149,28 @@ async def test_combined_energy_is_disabled_by_default(
     )
     assert registry_id is not None
     assert entity_registry.async_get(registry_id).disabled_by is not None
+
+
+def test_entity_categories_follow_the_review_guide() -> None:
+    """Dashboard entities stay uncategorised; capability and debug data is diagnostic."""
+    sensors = {description.key: description for description in SENSORS}
+    for key in (
+        "battery_power",
+        "daily_pv_generation",
+        "meter_active_power",
+        "mppt1_voltage",
+        "phase_a_voltage",
+        "total_dc_power",
+    ):
+        assert sensors[key].entity_category is None, key
+    for key in (
+        "bdc_rated_power",
+        "bms_max_charging_current",
+        "bms_max_discharging_current",
+        "device_type",
+        "export_power_limit_max",
+        "export_power_limit_min",
+        "inverter_rated_output",
+    ):
+        assert sensors[key].entity_category is EntityCategory.DIAGNOSTIC, key
+    assert sensors["device_type"].entity_registry_enabled_default is False

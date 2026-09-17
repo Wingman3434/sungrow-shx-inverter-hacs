@@ -63,12 +63,12 @@ Select the entities for the relevant inverter, using their actual entity IDs:
 | --- | --- |
 | Grid consumption energy | Total imported energy |
 | Return to grid energy | Total exported energy |
-| Grid power | Meter active power (positive import, negative export) |
+| Grid power | Active power on the Meter device (positive import, negative export) |
 | Solar production energy | Total PV generation |
 | Solar production power | Total DC power |
 | Battery charged energy | Total battery charge |
 | Battery discharged energy | Total battery discharge |
-| Battery power | Battery power (negative charging, positive discharging) |
+| Battery power | Power on the Battery device (negative charging, positive discharging) |
 
 Do not count the combined PV-plus-battery generation sensor as solar generation,
 or add derived and direct totals for the same flow. Phase V×I is an **apparent

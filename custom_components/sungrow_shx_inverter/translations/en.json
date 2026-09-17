@@ -79,25 +79,25 @@
         "name": "Version 3"
       },
       "version_4_sungrow_battery": {
-        "name": "Version 4 (Sungrow Battery)"
+        "name": "Version 4 (Sungrow battery)"
       },
       "protocol_version": {
-        "name": "Protocol Version"
+        "name": "Protocol version"
       },
       "arm_software": {
-        "name": "Arm Software"
+        "name": "ARM software"
       },
       "dsp_software": {
-        "name": "DSP Software"
+        "name": "DSP software"
       },
       "inverter_serial": {
-        "name": "inverter serial"
+        "name": "Serial number"
       },
       "device_type_code": {
-        "name": "device type code"
+        "name": "Device type code"
       },
       "inverter_rated_output": {
-        "name": "Inverter rated output"
+        "name": "Rated output"
       },
       "daily_pv_generation_battery_discharge": {
         "name": "Daily PV generation & battery discharge"
@@ -151,22 +151,22 @@
         "name": "MPPT4 current"
       },
       "battery_power": {
-        "name": "Battery power"
+        "name": "Power"
       },
       "grid_frequency": {
         "name": "Grid frequency"
       },
       "meter_active_power": {
-        "name": "Meter active power"
+        "name": "Active power"
       },
       "meter_phase_a_active_power": {
-        "name": "Meter phase A active power"
+        "name": "Phase A power"
       },
       "meter_phase_b_active_power": {
-        "name": "Meter phase B active power"
+        "name": "Phase B power"
       },
       "meter_phase_c_active_power": {
-        "name": "Meter phase C active power"
+        "name": "Phase C power"
       },
       "export_power_limit_min": {
         "name": "Export power limit min"
@@ -178,34 +178,34 @@
         "name": "BDC rated power"
       },
       "battery_current": {
-        "name": "Battery current"
+        "name": "Current"
       },
       "bms_max_charging_current": {
-        "name": "BMS max. charging current"
+        "name": "BMS max charging current"
       },
       "bms_max_discharging_current": {
-        "name": "BMS max. discharging current"
+        "name": "BMS max discharging current"
       },
       "battery_capacity_high_precision": {
-        "name": "Battery capacity high precision"
+        "name": "Capacity"
       },
       "backup_phase_a_power": {
-        "name": "Backup phase A power"
+        "name": "Phase A power"
       },
       "backup_phase_b_power": {
-        "name": "Backup phase B power"
+        "name": "Phase B power"
       },
       "backup_phase_c_power": {
-        "name": "Backup phase C power"
+        "name": "Phase C power"
       },
       "total_backup_power": {
-        "name": "Total backup power"
+        "name": "Total power"
       },
       "running_state_raw": {
         "name": "Running state raw"
       },
       "power_flow_status": {
-        "name": "Power Flow Status"
+        "name": "Power flow status"
       },
       "daily_pv_generation": {
         "name": "Daily PV generation"
@@ -238,16 +238,16 @@
         "name": "Total direct energy consumption"
       },
       "battery_voltage": {
-        "name": "Battery voltage"
+        "name": "Voltage"
       },
       "battery_level": {
-        "name": "Battery level"
+        "name": "Level"
       },
       "battery_state_of_health": {
-        "name": "Battery state of health"
+        "name": "State of health"
       },
       "battery_temperature": {
-        "name": "Battery temperature"
+        "name": "Temperature"
       },
       "daily_battery_discharge": {
         "name": "Daily battery discharge"
@@ -298,16 +298,16 @@
         "name": "Battery forced charge discharge cmd raw"
       },
       "battery_forced_charge_discharge_power": {
-        "name": "Battery forced charge discharge power"
+        "name": "Battery forced charge discharge power (read-back)"
       },
       "battery_max_soc": {
-        "name": "Battery max SoC"
+        "name": "Battery max SoC (read-back)"
       },
       "battery_min_soc": {
-        "name": "Battery min SoC"
+        "name": "Battery min SoC (read-back)"
       },
       "export_power_limit": {
-        "name": "Export power limit"
+        "name": "Export power limit (read-back)"
       },
       "backup_mode_raw": {
         "name": "Backup mode raw"
@@ -322,25 +322,25 @@
         "name": "Active power limitation ratio raw"
       },
       "battery_reserved_soc_for_backup": {
-        "name": "Battery reserved SoC for backup"
+        "name": "Battery reserved SoC for backup (read-back)"
       },
       "inverter_firmware_version": {
-        "name": "Inverter Firmware Version"
+        "name": "Inverter firmware version"
       },
       "communication_module_firmware_version": {
-        "name": "Communication Module Firmware Version"
+        "name": "Communication module firmware version"
       },
       "battery_firmware_version": {
-        "name": "Battery Firmware Version"
+        "name": "Battery firmware version"
       },
       "apl_shutdown_at_zero_raw": {
         "name": "APL shutdown at zero raw"
       },
       "battery_max_charge_power": {
-        "name": "Battery max charge power"
+        "name": "Battery max charge power (read-back)"
       },
       "battery_max_discharge_power": {
-        "name": "Battery max discharge power"
+        "name": "Battery max discharge power (read-back)"
       },
       "mppt1_power": {
         "name": "MPPT1 power"
@@ -364,22 +364,22 @@
         "name": "Phase C apparent power"
       },
       "inverter_state": {
-        "name": "inverter state"
+        "name": "Running state"
       },
       "device_type": {
-        "name": "device type"
+        "name": "Device type"
       },
       "battery_charging_power_signed": {
-        "name": "Battery charging power signed"
+        "name": "Charging power (signed)"
       },
       "battery_charging_power": {
-        "name": "Battery charging power"
+        "name": "Charging power"
       },
       "battery_discharging_power_signed": {
-        "name": "Battery discharging power signed"
+        "name": "Discharging power (signed)"
       },
       "battery_discharging_power": {
-        "name": "Battery discharging power"
+        "name": "Discharging power"
       },
       "import_power": {
         "name": "Import power"
@@ -388,16 +388,16 @@
         "name": "Export power"
       },
       "battery_level_nominal": {
-        "name": "Battery level (nominal)"
+        "name": "Level (nominal)"
       },
       "battery_charge_nominal": {
-        "name": "Battery charge (nominal)"
+        "name": "Energy stored (nominal)"
       },
       "battery_charge": {
-        "name": "Battery charge"
+        "name": "Energy stored"
       },
       "battery_charge_health_rated": {
-        "name": "Battery charge (health-rated)"
+        "name": "Energy stored (health-rated)"
       },
       "daily_consumed_energy": {
         "name": "Daily consumed energy"
@@ -417,27 +417,27 @@
         "name": "Battery discharging"
       },
       "positive_load_power": {
-        "name": "Positive Load Power"
+        "name": "Positive load power"
       },
       "exporting_power": {
-        "name": "Exporting Power"
+        "name": "Exporting power"
       },
       "importing_power": {
-        "name": "Importing Power"
+        "name": "Importing power"
       },
       "negative_load_power": {
-        "name": "Negative Load Power"
+        "name": "Negative load power"
       }
     },
     "number": {
       "battery_min_soc": {
-        "name": "Battery Min Soc"
+        "name": "Battery min SoC"
       },
       "battery_max_soc": {
-        "name": "Battery Max Soc"
+        "name": "Battery max SoC"
       },
       "battery_reserved_soc_for_backup": {
-        "name": "Battery Reserved SoC for Backup"
+        "name": "Battery reserved SoC for backup"
       },
       "battery_forced_charge_discharge_power": {
         "name": "Battery forced charge discharge power"
@@ -454,13 +454,13 @@
     },
     "switch": {
       "backup_mode": {
-        "name": "Backup Mode"
+        "name": "Backup mode"
       },
       "export_power_limit": {
-        "name": "Export power limit"
+        "name": "Export limitation"
       },
       "load_adjustment_mode": {
-        "name": "Load adjustment mode"
+        "name": "Load adjustment"
       }
     },
     "select": {

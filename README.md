@@ -100,6 +100,9 @@ and include:
   **Operating preset** selector and two opt-in command buttons.
 - Register blocks your inverter does not implement are detected and skipped, so an
   unsupported group is never created as permanently unavailable entities.
+- Entities are grouped across the inverter device and five sub-devices — **PV**,
+  **Battery**, **Meter**, **Energy** and **Backup** — so every page lists a short,
+  logical set instead of one long list.
 - One-tap mode presets built in: self-consumption (max/no battery discharge),
   zero/max export, battery bypass and forced charge/discharge, applied as the
   source scenes were and reading the inverter's live limits. No generated
